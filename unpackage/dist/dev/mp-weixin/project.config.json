@@ -34,6 +34,12 @@
           "query": "listId=3",
           "id": 0,
           "pathName": "pages/list/list"
+        },
+        {
+          "name": "detail",
+          "query": "songId=3",
+          "id": 1,
+          "pathName": "pages/detail/detail"
         }
       ]
     }

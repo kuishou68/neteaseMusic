@@ -14,7 +14,15 @@
 				
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/detail/detail",
+            "style" :                                                                                    
+            {
+                "navigationStyle" : "custom"
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -28,6 +36,11 @@
 				"name": "list", //模式名称
 				"path": "pages/list/list", //启动页面，必选
 				"query": "listId=3" //启动参数，在页面的onLoad函数里面得到
+			},
+			{
+				"name": "detail", //模式名称
+				"path": "pages/detail/detail", //启动页面，必选
+				"query": "songId=483937795" //启动参数，在页面的onLoad函数里面得到
 			}
 		]
 	}

@@ -66,7 +66,8 @@
         "usingComponents" : true
     },
     "mp-toutiao" : {
-        "usingComponents" : true
+        "usingComponents" : true,
+		"UIBackgroundModes":["audio"]
     },
     "uniStatistics" : {
         "enable" : false

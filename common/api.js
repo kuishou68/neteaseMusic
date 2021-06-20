@@ -28,7 +28,7 @@ export function topList(){
 		});
 	});
 }
-
+/*歌曲列表接口*/
 export function list(listId){
 	return uni.request({
 		url: `${baseUrl}/top/list?idx=${listId}`,
@@ -42,21 +42,21 @@ export function songDetail(id){
 		method : 'GET'
 	})
 }
-
+/*获取音频地址*/
 export function songUrl(id){
 	return uni.request({
 		url : `${baseUrl}/song/url?id=${id}`,
 		method : 'GET'
 	})
 }
-
+/*获取歌词*/
 export function songLyric(id){
 	return uni.request({
 		url : `${baseUrl}/lyric?id=${id}`,
 		method : 'GET'
 	})
 }
-
+/*获取相似音乐*/
 export function songSimi(id){
 	return uni.request({
 		url : `${baseUrl}/simi/song?id=${id}`,
