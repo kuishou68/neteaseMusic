@@ -5,11 +5,24 @@
 			<scroll-view scroll-y="true">
 				<!--搜索栏-->
 				<view class="index-search">
-					<text class="iconfont iconsearch"></text>
+					<text class="iconfont iconsearch" @tap="handleToSearch"></text>
 					<input type="text" placeholder="搜索歌曲" />
 				</view>
+				<!--骨架屏-->
+				<view v-if="isLoading">
+					 <m-for-skeleton
+							:avatarSize="200"
+							:row="3"
+							:loading="isLoading"
+							isarc="square"
+							v-for="(item,key) in 4"
+							:titleStyle = "{}"
+							:title = 'false'
+							:key="key">
+					  </m-for-skeleton>
+				</view>
 				<!--歌曲分类-->
-				<view class="index-list">
+				<view class="index-list" v-else>
 					<view class="index-list-item" v-for="(item, index) in topList" :key="index" @tap="handleTopList(item.listId)">
 						<view class="index-list-img">
 							<image :src="item.coverImgUrl" mode=""></image>
@@ -32,21 +45,28 @@
 	import musichesd from '../../components/musichead/musichead.vue'
 	// 引入接口
 	import { topList } from '../../common/api.js'
+	// 导入循环骨架屏
+	import mForSkeleton from "@/components/m-for-skeleton/m-for-skeleton";
 	export default {
 		data() {
 			return {
-				topList:[]
+				topList:[],
+				loading: true
 			}
 		},
 		// 局部组件
 		components : {
-			musichesd
+			musichesd,
+			mForSkeleton
 		},
 		// 等整个页面加载完之后触发的
 		onLoad() {
 			topList().then((res)=>{
 				if(res.length){
-					this.topList = res;
+					setTimeout(()=>{
+						this.topList = res;
+						this.loading = false;
+					},20000);
 				}
 			});
 		},
@@ -55,6 +75,12 @@
 				uni.navigateTo({
 					url: '/pages/list/list?listId=' + listId
 				});
+			},
+			// 搜索
+			handleToSearch(){
+				uni.navigateTo({
+					url:'./pages/search/search'
+				})
 			}
 		}
 	}

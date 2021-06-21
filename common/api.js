@@ -70,21 +70,21 @@ export function songComment(id){
 		method : 'GET'
 	})
 }
-
+/*热搜列表(详细)*/
 export function searchHot(){
 	return uni.request({
 		url : `${baseUrl}/search/hot/detail`,
 		method : 'GET'
 	})
 }
-
+/*搜索结果*/
 export function searchWord(word){
 	return uni.request({
 		url : `${baseUrl}/search?keywords=${word}`,
 		method : 'GET'
 	})
 }
-
+/*搜索建议*/
 export function searchSuggest(word){
 	return uni.request({
 		url : `${baseUrl}/search/suggest?keywords=${word}&type=mobile`,

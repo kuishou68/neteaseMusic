@@ -6,7 +6,7 @@
 			>
 		</view>
 		<musichesd tite="歌单" :icon="true" color="white"></musichesd>
-		<view class="container">
+		<view class="container" v-show="!isLoading">
 			<scroll-view scroll-y="true">
 				<!--播放转盘-->
 				<view class="detail-play" @tap="handleToPlay">
@@ -20,7 +20,7 @@
 					<view></view>
 				</view>
 				<!--歌词-->
-				<view class="detail-lyric">
+				<view class="detail-lyric" :style="{transform : 'translateY('+ - (lyricIndex - 1)*82 +'rpx)'}">
 					<view class="detail-lyric-item">
 						<view 
 							class="detail-lyric-item" 
@@ -35,16 +35,21 @@
 				<!--喜欢这首歌的人也听-->
 				<view class="detail-like">
 					<view class="detail-like-head">喜欢这首歌的人也听</view>
-					<view class="detail-like-item">
+					<view 
+						class="detail-like-item" 
+						v-for="(item, index) in songSimi"
+						:key="index"
+						@tap="handleToSimi(item.id)"
+						>
 						<view class="detail-like-img">
-							<image src="../../static/logo.png"></image>
+							<image :src="item.album.picUrl"></image>
 						</view>
 						<view class="detail-like-song">
-							<view>蓝</view>
+							<view>{{ item.name }}</view>
 							<view>
-								<image src="../../static/dujia.png"></image>
-								<image src="../../static/sq.png"></image>
-								四百七 - 蓝
+								<image :src="item.privilege.flag"></image>
+								<image :src="item.privilege.maxbr == 999000"></image>
+								{{ item.album.artista[0].name }} - {{ item.name }}
 							</view>
 						</view>
 						<text class="iconfont iconbofang"></text>
@@ -98,7 +103,7 @@
 				lyricIndex : 0,
 				iconplay : 'iconpause', // 播放状态
 				isPlayRotate : true,    // 暂停状态
-				
+				isLoading : true,
 			}
 		},
 		components:{
@@ -107,10 +112,37 @@
 		// 接收传递过来的id
 		onLoad(options){
 			// console.log(options.songId);
+			// 等待加载
+			uni.showToast({
+				title:'正在加载...'
+			})
 			this.getMusic(options.songId);
+		},
+		// 离开当前页面，回到上一级的时候，清除定时器
+		onUnload(){
+			this.cancelLyricIndex();
+			// #ifdef h5
+			this.bgAudioMannager.destroy();
+			// #endif
+		},
+		// 回到首页的时候，清除定时器
+		onHide(){
+			this.cancelLyricIndex();
+			// #ifdef h5
+			this.bgAudioMannager.destroy();
+			// #endif
 		},
 		methods: {
 			getMusic(songId){
+				// 通过保留歌曲id方式+1，自动播放下一首歌曲
+				this.$store.commit('NEXT_ID',songId);
+				
+				// 等待加载
+				uni.showToast({
+					title:'正在加载...'
+				});
+				this.isLoading = true; 
+				// 
 				Promise.all([ songDetail(songId), songSimi(songId), songComment(songId), songLyric(songId), songUrl(songId)]).then((res)=>{
 					if(res[0][1].data.code == '200){
 						this.songDetail = res[0][1].data.songs[0];
@@ -138,20 +170,41 @@
 					// 获取音频地址
 					if( res[4][1].data.code == '200'){
 						// 创建背景音频播放管理 实例
+						// #ifdef MP-WEIXIN					
 						this.bgAudioMannager = uni.getBackgroundAudioManager();
 						this.bgAudioMannager.title = this.songDetail.name;
-						this.bgAudioMannager.singer = res[4][1].data.data[0].url || '';
+						// #endif 
+						
+						// #ifdef H5
+						if(this.bgAudioMannager){
+							this.bgAudioMannager = uni.createInnerAudioContext();
+						}
+						this.iconPlay = 'iconbofang1';
+						this.isPlayRotate = false;
+						// #endif
+						
+						this.bgAudioMannager.src = res[4][1].data.data[0].url || '';
+						this.listenLyricIndex();
 						// 监听播放状态事件
 						this.bgAudioMannager.onPlay(()=>{
 							this.iconplay = 'iconpause';
 							this.isPlayRotate = true;
+							this.listenLyricIndex();
 						});
 						// 监听暂停状态事件
 						this.bgAudioMannager.onPause(()){
 							this.iconplay = 'iconbofang1';
 							this.isPlayRotate = false;
+							this.cancelLyricIndex();
+						});
+						// 监听上一首歌播放完毕，自动播放下一首歌
+						this.bgAudioMannager.onEnded(()=>{
+							this.getMusic(this.$store.state.nextId);
 						});
 					}
+					// 整个加载完成之后
+					this.isLoading = false;
+					uni.hideLoading();
 				});
 			},
 			// 转化成秒
@@ -169,6 +222,34 @@
 				}else{  // 否则暂停播放
 					this.bgAudioMannager.pause();
 				}
+			},
+			//  利用节流实现监听事件慢加载
+			this.listenLyricIndex(){
+				clearInterval(this.tmer);
+				// 监听歌词的变化,500毫秒监听一次
+				this.timer = setInterval(()=>{
+					 // 歌词遍历
+					 for(var i=0;i<this.songLyric.length;i++){
+						 // 播放时间小于最后一条歌词的时候
+						 if(this.bgAudioMannager.currentTime > this.songLyic[this.songLyric.length-1]){
+							 this.lyricIndex = this.songLyric.length-1;
+							 break;
+						 }
+						 // 播放时间小于上一条歌词
+						 if(this.bgAudioMannager.currentTime > this.songLyric[i].time && this.bgAudioMannager.currentTime > this.songLyric[i+1].time){
+							 this.lyricIndex = i;
+						 }
+						 
+					 } 
+				},500);
+			},
+			// 优化性能，防止暂停的时候定时器继续，影响性能
+			cancelLyricIndex(){
+				clearInterval(this.timer);
+			},
+			// 跳转切换歌曲，拿到handleToSimi.id 更新整个数据
+			handleToSimi(songId){
+				this.getMusic(songId);
 			}
 		}
 	}

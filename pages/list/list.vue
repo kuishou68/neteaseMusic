@@ -90,6 +90,9 @@
 				if(res[1].data.code == '200'){
 					this.playlist = res[1].data.playlist;
 					this.privileges = res[1].data.privileges;
+					this.$store.commit('INIT_TOPLISTIDS',res[1].data.playlist.trackIds);
+					this.isLoading = false;
+					uni.hideLoading();
 				}
 			})
 		},
