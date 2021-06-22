@@ -37,9 +37,15 @@
         },
         {
           "name": "detail",
-          "query": "songId=3",
+          "query": "songId=483937795",
           "id": 1,
           "pathName": "pages/detail/detail"
+        },
+        {
+          "name": "search",
+          "query": "",
+          "id": 2,
+          "pathName": "pages/search/search"
         }
       ]
     }

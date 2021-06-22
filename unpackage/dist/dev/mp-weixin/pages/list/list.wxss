@@ -166,6 +166,9 @@
 
 
 
+
+
+
 /*头部背景*/
 .list-head{ display: -webkit-box; display: -webkit-flex; display: flex; margin:30rpx;}
 .list-head-img{ width:265rpx; height:265rpx; border-radius: 15rpx; margin-right:40rpx; overflow: hidden; position: relative;}

@@ -105,11 +105,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/musichead/musichead":1};
+/******/ 		var cssChunks = {"components/m-for-skeleton/m-for-skeleton":1,"components/musichead/musichead":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/musichead/musichead":"components/musichead/musichead"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/m-for-skeleton/m-for-skeleton":"components/m-for-skeleton/m-for-skeleton","components/musichead/musichead":"components/musichead/musichead"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

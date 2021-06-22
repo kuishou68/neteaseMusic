@@ -1,6 +1,7 @@
 {
   "navigationStyle": "custom",
   "usingComponents": {
+    "m-for-skeleton": "/components/m-for-skeleton/m-for-skeleton",
     "musichesd": "/components/musichead/musichead"
   }
 }
