@@ -24,9 +24,11 @@ uni-app、vue、小程序于一身的实战，很好的一个练手项目。包�
 
 
 
-- 👀开源不易，🙏球球路过的大哥点个Follow、点个Star再走吧🙏！ https://github.com/kuishou68![image-20210622155932242](https://github.com/kuishou68/assets/blob/main/image-20210622155932242.png)
+👀开源不易，🙏球球路过的大哥点个Follow、点个Star再走吧🙏！ https://github.com/kuishou68
 
-- 🚀项目下载地址  https://github.com/kuishou68/neteaseMusic
+![image-20210622155932242](https://github.com/kuishou68/assets/blob/main/image-20210622155932242.png)
+
+🚀项目下载地址  https://github.com/kuishou68/neteaseMusic
 
 ![image-20210622160119798](https://github.com/kuishou68/assets/blob/main/image-20210622160119798.png)
 
@@ -34,7 +36,9 @@ uni-app、vue、小程序于一身的实战，很好的一个练手项目。包�
 
 ![image-20210622130801401](https://github.com/kuishou68/assets/blob/main/image-20210622130801401.png)
 
-2.💡其中用到了骨架屏，下载地址  https://ext.dcloud.net.cn/plugin?id=1439![image-20210622131410072](https://github.com/kuishou68/assets/blob/main/image-20210622131410072.png)
+2.💡其中用到了骨架屏，下载地址  https://ext.dcloud.net.cn/plugin?id=1439
+
+![image-20210622131410072](https://github.com/kuishou68/assets/blob/main/image-20210622131410072.png)
 
 3.🌈两种安装方式，自行选择。
 
