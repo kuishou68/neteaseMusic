@@ -31,7 +31,7 @@ export function topList(){
 /*歌曲列表接口*/
 export function list(listId){
 	return uni.request({
-		url: `${baseUrl}/top/playlist?idx=${listId}`,
+		url: `${baseUrl}/toplist?idx=${listId}`,
 		method: 'GET'
 	});
 }

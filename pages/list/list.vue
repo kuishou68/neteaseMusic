@@ -96,6 +96,7 @@
 				}
 			})
 		},
+		// 播放接口
 		methods: {
 			handleToDetail(id){
 				uni.navigateTo({
