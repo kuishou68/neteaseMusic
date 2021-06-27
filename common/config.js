@@ -1,1 +1,1 @@
-export const baseUrl = 'http://localhost:3000'; // 配置信息 
+export const baseUrl = 'http://localhost:3000'; // 地址配置信息 ，需要上云的可以修改这里为你的服务器ip

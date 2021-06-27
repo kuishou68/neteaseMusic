@@ -1,8 +1,8 @@
 <template>
 	<view class="list">
-		<view class="fixbg" :style="{ 'background-image' : 'url('+playlist.coverImgUrl+')'}"></view>
-		<musichesd tite="歌单" :icon="true" color="white"></musichesd>
-		<view class="container" v-show="!isLoading">
+		<view class="fixbg" :style="{backgroundImage:'url('+ playlist.coverImgUrl +')'}"></view>
+		<musichead title="歌单" :icon="true" color="white"></musichead>
+		<view class="container">
 			<scroll-view scroll-y="true">
 				<view class="list-head">
 					<view class="list-head-img">
@@ -12,38 +12,38 @@
 					</view>
 					<view class="list-head-text">
 						<view>{{ playlist.name }}</view>
+						<!--网易云logo-->
 						<view>
-							<image :src="playlist.creator.avatarUrl"></image>{{ playlist.creator.nickname }}
+							<image :src="playlist.creator.avatarUrl" mode=""></image>
+							<text>{{ playlist.creator.nickname }}</text>
 						</view>
-						<view>
-							{{ playlist.description }}
-						</view>
+						<view>{{ playlist.description }}</view>
 					</view>
 				</view>
 				<!--差异化对待，只有微信能识别这个标签-->
-				<!--#ifdef MP-WEIXIN-->
-					<button class="list-share" open-type="share">
-						<text class="iconfont iconicon-"></text>分享给微信好友
-					</button>
-				<!--#endif-->
+				<!-- #ifdef MP-WEIXIN -->
+				<button v-show="isShow" class="list-share" open-type="share">
+					<text class="iconfont iconicon-"></text>分享给微信好友
+				</button>
+				<!-- #endif -->
 				<view class="list-music">
-					<view class="list-music-title">
+					<view v-show="isShow" class="list-music-title">
 						<text class="iconfont iconbofang1"></text>
 						<text>播放全部</text>
 						<text>(共{{ playlist.trackCount }}首)</text>
 					</view>
-					<view class="list-music-item" v-for="(item, index) in playlist.tracks" :key="index" @tap="handleToDetail(item.id)">
-						<view class="list-music-top">{{ index+1 }}</view>
+					<view class="list-music-item" v-for="(item,index) in playlist.tracks" :key="item.id" @tap="handleToDetail(item.id)">
+						<view class="list-music-top">{{ index + 1 }}</view>
 						<view class="list-music-song">
 							<view>{{ item.name }}</view>
 							<view>
-								<!--SQ歌曲图标过滤-->
-								<image v-if="privileges[index].flag > 70 && privileges[idnex].flag " src="../../static/dujia.png"></image>
-								<!--独家歌曲图标过滤-->
-								<image v-if="privileges[index].maxbr == 999000" src="../../static/sq.png"></image>
-								{{ item.ar[0].name}} - {{ item.name }}
+								<!--图标过滤-->
+								<image v-if=" privileges[index].flag > 60 && privileges[index].flag < 70" src="../../static/dujia.png" mode=""></image>
+								<image v-if="privileges[index].maxbr == 999000" src="../../static/sq.png" mode=""></image>
+								{{ item.ar[0].name }} - {{ item.name }}
 							</view>
 						</view>
+						<!--播放按钮-->
 						<text class="iconfont iconbofang"></text>
 					</view>
 				</view>
@@ -51,63 +51,64 @@
 		</view>
 	</view>
 </template>
-		
+
 <script>
-	// 引入css绝对路径
-	import '@/common/iconfont.css'
-	// 引入组件
+	// 引入返回上一级、返回首页 头部组件
 	import musichead from '../../components/musichead/musichead.vue'
 	// 引入 歌曲列表接口
 	import { list } from '../../common/api.js'
+	// 引入css绝对路径
+	import '../../common/iconfont.css'
 	export default {
-		data(){
-			return{
-				playlist:{
-					// 榜单背景图
+		data() {
+			return {
+				// 榜单背景图
+				playlist : {
 					coverImgUrl : '',
-					// 
-					creator : {
-						avatarUrl :''
-					},
-					trackCount: ''
+					trackCount : '',
+					creator : ''
 				},
 				privileges : [],
-				isLoading: true
+				isShow : false
 			}
 		},
 		// 注册组件
-		components:{
+		components: {
 			musichead
 		},
-		onLoad(option){
-			// 等待加载
-			uni.showToast({
-				title:'正在加载...'
-			})
+		// list接口是在onLoad()当中调用的
+		onLoad(playlist){
+			console.log(playlist);
+			// 修改前
+			// let listId = options.listId;
+			// 修改后，修改 options 为 playlist ，之前的idx是在options，现在榜单的id在playlist下
+			let listId = playlist.id;
+			// console.log(listId); // 打印传递过来的id
 			// 放回歌曲列表
-			list(options.listId).then((res)=>{
+			list(listId).then((res)=>{
+				// 打印接口信息
+				// console.log(res);
 				// 判断接口状态
 				if(res[1].data.code == '200'){
 					this.playlist = res[1].data.playlist;
 					this.privileges = res[1].data.privileges;
-					this.$store.commit('INIT_TOPLISTIDS',res[1].data.playlist.trackIds);
-					this.isLoading = false;
-					uni.hideLoading();
+					this.$store.commit('INIT_CHANGE',this.playlist.trackIds);
+					this.isShow = true;
 				}
-			})
+			});
 		},
-		// 播放接口
+		// 播放接口，点击之后传递songId出去
 		methods: {
 			handleToDetail(id){
 				uni.navigateTo({
-					url: '/pages/detail/detail?id=' + songid
+					url: '/pages/detail/detail?songId=' + id
 				});
 			}
 		}
 	}
 </script>
-	
-<style>
+
+<style scoped>
 	/*头部背景*/
 	.list-head{ display: flex; margin:30rpx;}
 	.list-head-img{ width:265rpx; height:265rpx; border-radius: 15rpx; margin-right:40rpx; overflow: hidden; position: relative;}
@@ -119,7 +120,7 @@
 	.list-head-text view:nth-child(2){ display: flex; align-items: center; margin:30rpx 0;}
 	.list-head-text view:nth-child(2) text{ margin-left: 15rpx;}
 	.list-head-text view:nth-child(3){ line-height: 38rpx;}
-	 /*分享音乐*/
+	/*分享音乐*/
 	.list-share{ width:330rpx; height:72rpx; margin:0 auto; background:rgba(0,0,0,0.4); text-align: center; line-height: 72rpx; font-size:26rpx; color:white; border-radius: 36rpx;}
 	.list-share text{ margin-right:15rpx;}
 	/*歌单*/

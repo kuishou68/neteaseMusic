@@ -169,31 +169,33 @@
 
 
 
+
+
 /*头部背景*/
-.list-head{ display: -webkit-box; display: -webkit-flex; display: flex; margin:30rpx;}
-.list-head-img{ width:265rpx; height:265rpx; border-radius: 15rpx; margin-right:40rpx; overflow: hidden; position: relative;}
-.list-head-img image{ width:100%; height:100%;}
-.list-head-img text{ position: absolute; font-size:26rpx; color:white; right:8rpx; top:8rpx;}
-.list-head-text{ -webkit-box-flex:1; -webkit-flex:1; flex:1; font-size:24rpx; color:#c3d1e3;}
-.list-head-text image{ width:52rpx; height:52rpx; border-radius: 50%;}
-.list-head-text view:nth-child(1){ font-size:34rpx; color:#ffffff;}
-.list-head-text view:nth-child(2){ display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; margin:30rpx 0;}
-.list-head-text view:nth-child(2) text{ margin-left: 15rpx;}
-.list-head-text view:nth-child(3){ line-height: 38rpx;}
+.list-head.data-v-7d5e07c6{ display: -webkit-box; display: -webkit-flex; display: flex; margin:30rpx;}
+.list-head-img.data-v-7d5e07c6{ width:265rpx; height:265rpx; border-radius: 15rpx; margin-right:40rpx; overflow: hidden; position: relative;}
+.list-head-img image.data-v-7d5e07c6{ width:100%; height:100%;}
+.list-head-img text.data-v-7d5e07c6{ position: absolute; font-size:26rpx; color:white; right:8rpx; top:8rpx;}
+.list-head-text.data-v-7d5e07c6{ -webkit-box-flex:1; -webkit-flex:1; flex:1; font-size:24rpx; color:#c3d1e3;}
+.list-head-text image.data-v-7d5e07c6{ width:52rpx; height:52rpx; border-radius: 50%;}
+.list-head-text view.data-v-7d5e07c6:nth-child(1){ font-size:34rpx; color:#ffffff;}
+.list-head-text view.data-v-7d5e07c6:nth-child(2){ display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; margin:30rpx 0;}
+.list-head-text view:nth-child(2) text.data-v-7d5e07c6{ margin-left: 15rpx;}
+.list-head-text view.data-v-7d5e07c6:nth-child(3){ line-height: 38rpx;}
 /*分享音乐*/
-.list-share{ width:330rpx; height:72rpx; margin:0 auto; background:rgba(0,0,0,0.4); text-align: center; line-height: 72rpx; font-size:26rpx; color:white; border-radius: 36rpx;}
-.list-share text{ margin-right:15rpx;}
+.list-share.data-v-7d5e07c6{ width:330rpx; height:72rpx; margin:0 auto; background:rgba(0,0,0,0.4); text-align: center; line-height: 72rpx; font-size:26rpx; color:white; border-radius: 36rpx;}
+.list-share text.data-v-7d5e07c6{ margin-right:15rpx;}
 /*歌单*/
-.list-music{ background:white; border-radius: 50rpx; overflow: hidden; margin-top:45rpx;}
-.list-music-title{ height:58rpx; line-height: 58rpx; margin:30rpx 30rpx 70rpx 30rpx;}
-.list-music-title text:nth-child(1){ font-size:58rpx;}
-.list-music-title text:nth-child(2){ font-size:34rpx; margin:0 10rpx 0 25rpx;}
-.list-music-title text:nth-child(3){ font-size:28rpx; color:#b2b2b2;}
-.list-music-item{ display: -webkit-box; display: -webkit-flex; display: flex; margin:0 30rpx 70rpx 44rpx; -webkit-box-align: center; -webkit-align-items: center; align-items: center;}
-.list-music-top{ width:56rpx; font-size:28rpx; color:#979797;}
-.list-music-song{ -webkit-box-flex:1; -webkit-flex:1; flex:1; line-height: 40rpx;}
-.list-music-song view:nth-child(1){ font-size:30rpx; width:70vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-.list-music-song view:nth-child(2){ font-size:22rpx; color:#a2a2a2; width:70vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-.list-music-song image{ width:34rpx; height:22rpx; margin-right:10rpx;}
-.list-music-item text{ font-size:50rpx; color:#c8c8c8;}
+.list-music.data-v-7d5e07c6{ background:white; border-radius: 50rpx; overflow: hidden; margin-top:45rpx;}
+.list-music-title.data-v-7d5e07c6{ height:58rpx; line-height: 58rpx; margin:30rpx 30rpx 70rpx 30rpx;}
+.list-music-title text.data-v-7d5e07c6:nth-child(1){ font-size:58rpx;}
+.list-music-title text.data-v-7d5e07c6:nth-child(2){ font-size:34rpx; margin:0 10rpx 0 25rpx;}
+.list-music-title text.data-v-7d5e07c6:nth-child(3){ font-size:28rpx; color:#b2b2b2;}
+.list-music-item.data-v-7d5e07c6{ display: -webkit-box; display: -webkit-flex; display: flex; margin:0 30rpx 70rpx 44rpx; -webkit-box-align: center; -webkit-align-items: center; align-items: center;}
+.list-music-top.data-v-7d5e07c6{ width:56rpx; font-size:28rpx; color:#979797;}
+.list-music-song.data-v-7d5e07c6{ -webkit-box-flex:1; -webkit-flex:1; flex:1; line-height: 40rpx;}
+.list-music-song view.data-v-7d5e07c6:nth-child(1){ font-size:30rpx; width:70vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.list-music-song view.data-v-7d5e07c6:nth-child(2){ font-size:22rpx; color:#a2a2a2; width:70vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.list-music-song image.data-v-7d5e07c6{ width:34rpx; height:22rpx; margin-right:10rpx;}
+.list-music-item text.data-v-7d5e07c6{ font-size:50rpx; color:#c8c8c8;}
 

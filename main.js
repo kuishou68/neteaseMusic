@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App'
-import stote from  './store/index.js'
+import store from './store/index.js'
 
 Vue.config.productionTip = false
 // 创建一个过滤器

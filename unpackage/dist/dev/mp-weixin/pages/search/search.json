@@ -1,4 +1,6 @@
 {
-  "navigationBarTitleText": "",
-  "enablePullDownRefresh": false
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "musichead": "/components/musichead/musichead"
+  }
 }

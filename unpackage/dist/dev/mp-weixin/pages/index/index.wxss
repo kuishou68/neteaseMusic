@@ -149,16 +149,17 @@
 
 
 
+
 /*搜索栏*/
-.index{}
-.index-search{display: -webkit-box;display: -webkit-flex;display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; height:70rpx; margin:70rpx 30rpx 30rpx 30rpx;background:#f7f7f7; border-radius: 50rpx;}
-.index-search texct{ font-size:26rpx; margin-right:26rpx; margin-left:28rpx;}
-.index-search input{ font-size:28rpx; -webkit-box-flex:1; -webkit-flex:1; flex:1;}
+.index-search{ display: -webkit-box; display: -webkit-flex; display: flex; background:#f7f7f7; height:73rpx; margin:70rpx 30rpx 30rpx 30rpx; border-radius: 50rpx; -webkit-box-align: center; -webkit-align-items: center; align-items: center;}
+.index-search text{ margin:0 27rpx;}
+.index-search input{ font-size:26rpx; -webkit-box-flex:1; -webkit-flex:1; flex:1;}
 /*歌曲分类*/
 .index-list{ margin:0 30rpx;}
-.index-list-item{display: -webkit-box;display: -webkit-flex;display: flex;margin-bottom: 34rpx;}
-.index-list-img{ width:212rpx; height: 212rpx; position: relative; border-radius: 30px;overflow:hidden; margin-right: 22rpx;}
-.index-list-img image{width:100%; height:100%;}
-.index-list-img text{ position:absolute; left:12px;bottom: 16rpx; color: white; font-size: 20rpx;}
-.index-list-text{ font-size:24rpx; line-height:66rpx;}
+.index-list-item{ display: -webkit-box; display: -webkit-flex; display: flex; margin-bottom: 35rpx;}
+.index-list-img{ width:212rpx; height:212rpx; margin-right:20rpx; border-radius: 15rpx; overflow: hidden; position: relative;}
+.index-list-img image{ width:100%; height:100%;}
+.index-list-img text{ position: absolute; font-size:22rpx; color:white; bottom: 15rpx; left:15rpx;}
+.index-list-text{ -webkit-box-flex:1; -webkit-flex:1; flex:1; font-size:24rpx; line-height: 68rpx;}
+.index-list-text view{}
 

@@ -872,7 +872,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"neteaseMusic","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"neteaseMusic","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -7446,7 +7446,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"neteaseMusic","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_NAME":"neteaseMusic","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7467,14 +7467,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"neteaseMusic","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"neteaseMusic","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"neteaseMusic","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"neteaseMusic","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7560,7 +7560,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"neteaseMusic","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"neteaseMusic","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -7998,9 +7998,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!**********************************************!*\
-  !*** D:/Code/uniapp/neteaseMusic/pages.json ***!
-  \**********************************************/
+/*!************************************************************!*\
+  !*** D:/Code/uniapp/neteaseMusic-uniApp-master/pages.json ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8141,9 +8141,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 11 */
-/*!**************************************************!*\
-  !*** D:/Code/uniapp/neteaseMusic/store/index.js ***!
-  \**************************************************/
+/*!****************************************************************!*\
+  !*** D:/Code/uniapp/neteaseMusic-uniApp-master/store/index.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8155,18 +8155,18 @@ _vue.default.use(_vuex.default);var _default =
 
 new _vuex.default.Store({
   state: {
-    topListIds: [],
+    topIdList: [],
     nextId: '' },
 
   mutations: {
-    INIT_TPLISTIDS: function INIT_TPLISTIDS(statr, playload) {
-      state.topListIds = payload;
+    INIT_CHANGE: function INIT_CHANGE(state, payload) {
+      state.topIdList = payload;
     },
-    // 得到下一个ID
+    // 自动播放，得到下一个ID
     NEXT_ID: function NEXT_ID(state, payload) {
-      for (var i = 0; i < state.topListIds.length; i++) {
-        if (state.topListIds[i].id == payload) {
-          state.nextId = state.topListIds[i + 1].id;
+      for (var i = 0; i < state.topIdList.length; i++) {
+        if (state.topIdList[i].id == payload) {
+          state.nextId = state.topIdList[i + 1].id;
         }
       }
     } } });exports.default = _default;
@@ -9291,9 +9291,9 @@ var index = {
 /* 17 */,
 /* 18 */,
 /* 19 */
-/*!*******************************************************!*\
-  !*** D:/Code/uniapp/neteaseMusic/common/iconfont.css ***!
-  \*******************************************************/
+/*!*********************************************************************!*\
+  !*** D:/Code/uniapp/neteaseMusic-uniApp-master/common/iconfont.css ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9303,21 +9303,23 @@ var index = {
 
 /***/ }),
 /* 20 */
-/*!*************************************************!*\
-  !*** D:/Code/uniapp/neteaseMusic/common/api.js ***!
-  \*************************************************/
+/*!***************************************************************!*\
+  !*** D:/Code/uniapp/neteaseMusic-uniApp-master/common/api.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.topList = topList;exports.list = list;exports.songDetail = songDetail;exports.songUrl = songUrl;exports.songLyric = songLyric;exports.songSimi = songSimi;exports.songComment = songComment;exports.searchHot = searchHot;exports.searchWord = searchWord;exports.searchSuggest = searchSuggest;
-var _config = __webpack_require__(/*! ./config.js */ 21); // 引入config.js配置文件
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.topList = topList;exports.list = list;exports.songDetail = songDetail;exports.songUrl = songUrl;exports.songLyric = songLyric;exports.songSimi = songSimi;exports.songComment = songComment;exports.searchHot = searchHot;exports.searchWord = searchWord;exports.searchSuggest = searchSuggest;var _config = __webpack_require__(/*! ./config.js */ 21);
 // 请求接口
 function topList() {
-  var listIds = ['3', '0', '2', '1'];
+  // 修改前，以前的接口依赖idx 
+  // var listIds = ['3' , '0' , '2' , '1' ];
+  // 修改后，id是不同版单的唯一值
+  var listIds = ['19723756', '3779629', '2884035', '3778678'];
   return new Promise(function (resolve, reject) {
     uni.request({
-      // 请求地址
+      // 首页分类接口
       url: "".concat(_config.baseUrl, "/toplist/detail"),
       // 请求方式
       method: 'GET',
@@ -9327,8 +9329,8 @@ function topList() {
         // 得到数组前四项
         var result = res.data.list;
         result.length = 4;
+        // 遍历一遍，把结果返回出去
         for (var i = 0; i < result.length; i++) {
-          // 遍历一遍，把结果返回出去
           result[i].listId = listIds[i];
         }
         resolve(result);
@@ -9340,63 +9342,66 @@ function topList() {
 
   });
 }
-/*歌曲列表接口*/
+// 歌曲列表接口
 function list(listId) {
   return uni.request({
-    url: "".concat(_config.baseUrl, "/top/list?idx=").concat(listId),
+    // 旧接口，idx已经废弃了
+    // url: `${baseUrl}/top/list?idx=${listId}`,
+    // 新接口，后台做了登录拦截！
+    url: "".concat(_config.baseUrl, "/playlist/detail?id=").concat(listId),
     method: 'GET' });
 
 }
-
+// 获取所有歌曲详情
 function songDetail(id) {
   return uni.request({
     url: "".concat(_config.baseUrl, "/song/detail?ids=").concat(id),
     method: 'GET' });
 
 }
-/*获取音频地址*/
+// 获取音频地址
 function songUrl(id) {
   return uni.request({
     url: "".concat(_config.baseUrl, "/song/url?id=").concat(id),
     method: 'GET' });
 
 }
-/*获取歌词*/
+// 获取歌词
 function songLyric(id) {
   return uni.request({
     url: "".concat(_config.baseUrl, "/lyric?id=").concat(id),
     method: 'GET' });
 
 }
-/*获取相似音乐*/
+// 获取相似音乐
 function songSimi(id) {
   return uni.request({
     url: "".concat(_config.baseUrl, "/simi/song?id=").concat(id),
     method: 'GET' });
 
 }
-
+// 歌曲评论
 function songComment(id) {
   return uni.request({
     url: "".concat(_config.baseUrl, "/comment/music?id=").concat(id),
     method: 'GET' });
 
 }
-/*热搜列表(详细)*/
+// 热搜列表(详细)
 function searchHot() {
   return uni.request({
     url: "".concat(_config.baseUrl, "/search/hot/detail"),
     method: 'GET' });
 
 }
-/*搜索结果*/
+// 搜索结果
 function searchWord(word) {
   return uni.request({
     url: "".concat(_config.baseUrl, "/search?keywords=").concat(word),
     method: 'GET' });
 
 }
-/*搜索建议*/
+// 搜索建议
 function searchSuggest(word) {
   return uni.request({
     url: "".concat(_config.baseUrl, "/search/suggest?keywords=").concat(word, "&type=mobile"),
@@ -9407,14 +9412,14 @@ function searchSuggest(word) {
 
 /***/ }),
 /* 21 */
-/*!****************************************************!*\
-  !*** D:/Code/uniapp/neteaseMusic/common/config.js ***!
-  \****************************************************/
+/*!******************************************************************!*\
+  !*** D:/Code/uniapp/neteaseMusic-uniApp-master/common/config.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.baseUrl = void 0;var baseUrl = 'http://localhost:3000'; // 配置信息 
+Object.defineProperty(exports, "__esModule", { value: true });exports.baseUrl = void 0;var baseUrl = 'http://localhost:3000'; // 地址配置信息 ，需要上云的可以修改这里为你的服务器ip
 exports.baseUrl = baseUrl;
 
 /***/ })

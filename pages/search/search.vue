@@ -1,24 +1,13 @@
 <template>
 	<view class="search">
-		<musichesd title="搜索" :icon="true" :iconblack="true"></musichesd>
-		<view class="container" >
+		<musichead title="搜索" :icon="true" :iconBlack="true"></musichead>
+		<view class="container">
 			<scroll-view scroll-y="true">
 				<!--搜索栏-->
 				<view class="search-search">
-					<text class="iconfont iconsearch" @tap="handleToSearch"></text>
-					<input 
-						type="text" 
-						placeholder="搜索歌曲"
-						v-model="searchWord"
-						@confirm="handleToSearch(searchWord)" 
-						@input="handleToSuggest"
-						 />
-					<text 
-						v-show="searchType !=1" 
-						class="iconfont iconguanbi"
-						@tap="handleToClose"
-						>
-					</text>
+					<text class="iconfont iconsearch"></text>
+					<input type="text" placeholder="搜索歌曲" v-model="searchWord" @confirm="handleToSearch" @input="handleToSuggest" />
+					<text v-show="searchType == 2" @tap="handleToClose" class="iconfont iconguanbi"></text>
 				</view>
 				<!--块标签:用于占位,划分两个不同状态的区域-->
 				<block v-if="searchType == 1">
@@ -29,28 +18,17 @@
 							<text class="iconfont iconlajitong" @tap="handleToClear"></text>
 						</view>
 						<view class="search-history-list">
-							<view 
-								v-for="(item, index in searchHistroy)"
-								:key="index"
-								@tap="handleToWord(item)"
-								>{{ item }}
-							</view>
+							<view v-for="(item,index) in historyList" :key="index" @tap="handleToWord(item)">{{ item }}</view>
 						</view>
 					</view>
 					<!--热搜榜-->
 					<view class="search-hot">
-						<view class="search-hot-head">热搜榜</view>
-						<view 
-							class="search-hot-item" 
-							v-for="(item, index) in searchHot" 
-							:key="index"
-							@tap="handleToWord(item.searchWord)"
-							>
+						<view class="search-hot-title">热搜榜</view>
+						<view class="search-hot-item" v-for="(item,index) in searchHot" :key="index" @tap="handleToWord(item.searchWord)">
 							<view class="search-hot-top">{{ index + 1 }}</view>
 							<view class="search-hot-word">
 								<view>
-									{{ item.searchWord }}
-									<image :src=".item.iconUrl" mode="aspectFill"></image>
+									{{ item.searchWord }} <image :src="item.iconType ? item.iconUrl : ''" mode="aspectFit"></image>
 								</view>
 								<view>{{ item.content }}</view>
 							</view>
@@ -58,32 +36,25 @@
 						</view>
 					</view>
 				</block>
+				<!--块标签:用于占位,划分两个不同状态的区域-->
 				<block v-else-if="searchType == 2">
 					<view class="search-result">
-							<view 
-								class="search-result-item" 
-								v-for="(item, index) in searchList"
-								:key="index"
-								@tap="handleToDetail(item.id)"
-								>
+						<view class="search-result-item" v-for="(item,index) in searchList" :key="index" @tap="handleToDetail(item.id)">
 							<view class="search-result-word">
 								<view>{{ item.name }}</view>
-								<view>{{ item.artists[0].name }} - {{ item.album.name }}</view>`
+								<view>{{ item.artists[0].name }} - {{ item.album.name }}</view>
 							</view>
 							<text class="iconfont iconbofang"></text>
 						</view>
 					</view>
 				</block>
+				<!--块标签:用于占位,划分两个不同状态的区域-->
 				<block v-else-if="searchType == 3">
 					<view class="search-suggest">
-						<view class="search-suggest-head">搜索“{{ searchWord }}”</view>
-						<view 
-							class="search-suggest-item"
-							v-for="(item, index) in searchSuggest"
-							:key="index"
-							@tap="handleToWord(item.keyword)"
-							>
-							<text class="iconfont iconsearch">{{ item.keyword }}</text>
+						<view class="search-suggest-title">搜索"{{ this.searchWord }}"</view>
+						<view class="search-suggest-item" v-for="(item,index) in suggestList" :key="index" @tap="handleToWord(item.keyword)">
+							<text class="iconfont iconsearch"></text>
+							{{ item.keyword }}
 						</view>
 					</view>
 				</block>
@@ -93,21 +64,19 @@
 </template>
 
 <script>
-	// 引入css绝对路径
-	import '@/common/iconfont.css'
-	// 头部组件
-	import musichesd from '../../components/musichead/musichead.vue'
 	// 引入搜索相关的三个接口
-	import{ searchHot, searchWord, searchSuggeat } from '../../common/api.js'
+	import { searchHot , searchWord , searchSuggest } from '../../common/api.js'
+	// 引入css绝对路径
+	import '../../common/iconfont.css'
 	export default {
 		data() {
 			return {
 				searchHot : [],
 				searchWord : '',
-				searchHistroy: [],
-				searchType = 1,
+				historyList : [],
+				searchType : 1,
 				searchList : [],
-				searchSuggest : []
+				suggestList : []
 			}
 		},
 		onLoad(){
@@ -120,66 +89,53 @@
 			});
 			// 取出历史记录
 			uni.getStorage({
-				key: 'searchHistory',
-				    success: (res)=>{
-						// 更新历史记录的值
-				        this.searchHistroy = res.data;
-				  }
-			})
-		},
-		// 注册组件
-		components:{
-			musichesd
+			    key: 'searchHistory',
+			    success:(res)=>{
+					// 更新历史记录的值
+			        this.historyList = res.data;
+			    }
+			});
 		},
 		methods: {
-			// 点击热歌榜回传到搜索栏进行搜索
-			handleToWord(word){
-				this.searchWord = word;
-				this.handleToSearch(word);
-			}
 			// 搜索历史，保存历史记录
-			handleToSearch(word){
+			handleToSearch(){
 				// unshift 新产生的搜索内容出现在头部
-				this.searchHistroy.unshift(word);
+				this.historyList.unshift(this.searchWord);
 				// 搜索内容去重
-				this.searchHistroy = [...new Set(this.searchHistroy)];
+				this.historyList = [...new Set(this.historyList)];
 				// 搜索记录内容不超过 10 个历史记录
-				if(this.searchHistroy.length > 10){
-					this.searchHistroy.length = 10;
+				if(this.historyList.length > 10){
+					this.historyList.length = 10;
 				}
 				// 下次刷新的时候，还能看到搜索记录
 				uni.setStorage({
-					key: 'searchHistory',
-					data: this.searchHistroy
+				    key: 'searchHistory',
+				    data: this.historyList
 				});
-			}
+				this.getSearchList(this.searchWord);
+			},
 			// 删除历史记录
 			handleToClear(){
 				uni.removeStorage({
-				    key: 'searchHistory',
-				    success: (res)=>{
-				        this.searchHistroy = [];
-				    }
+					key:'searchHistory',
+					success:()=>{
+						this.historyList = [];
+					}
 				});
-			}
+			},
 			// 获取搜索结果
-			getSearchList(){
+			getSearchList(word){
 				searchWord(word).then((res)=>{
 					if(res[1].data.code == '200'){
 						this.searchList = res[1].data.result.songs;
 						this.searchType = 2;
 					}
-				})
+				});
 			},
 			// 搜索栏的关闭按钮 X
 			handleToClose(){
 				this.searchWord = '';
-			},
-			// 搜索到之后，点击歌曲跳转播放
-			handleToDetail(songId){
-				uni.navigateTo({
-					url: '/pages/detail/detail?songId=' + songId,
-				});
+				this.searchType = 1;
 			},
 			// 边输入边搜索
 			handleToSuggest(ev){
@@ -194,24 +150,34 @@
 				searchSuggest(value).then((res)=>{
 					// 判断res接口的状态
 					if(res[1].data.code == '200'){
-						this.searchSuggest = res[1].data.result.allMatch;
+						this.suggestList = res[1].data.result.allMatch;
 						this.searchType = 3;
-						
 					}
+				});
+			},
+			// 点击热歌榜回传到搜索栏进行搜索
+			handleToWord(word){
+				this.searchWord = word;
+				this.handleToSearch();
+			},
+			// 搜索到之后，点击歌曲跳转播放
+			handleToDetail(songId){
+				uni.navigateTo({
+					url: '/pages/detail/detail?songId='+songId
 				});
 			}
 		}
 	}
 </script>
 
-<style>
+<style scoped>
 	/*搜索栏*/
 	.search-search{ display: flex; background:#f7f7f7; height:73rpx; margin:28rpx 30rpx 30rpx 30rpx; border-radius: 50rpx; align-items: center;}
 	.search-search text{ margin:0 27rpx;} 
 	.search-search input{ font-size:26rpx; flex:1;}
 	/*搜索历史*/
 	.search-history{ margin:0 30rpx; font-size:26rpx;}
-	.sea1rch-history-head{ display: flex; justify-content: space-between;}
+	.search-history-head{ display: flex; justify-content: space-between;}
 	.search-history-list{ display: flex; margin-top:36rpx; flex-wrap: wrap;}
 	.search-history-list view{ padding:20rpx 40rpx; background:#f7f7f7; border-radius: 50rpx; margin-right:30rpx; margin-bottom: 20rpx;}
 	/*热搜榜*/
