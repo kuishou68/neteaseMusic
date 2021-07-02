@@ -49,12 +49,15 @@
 				</view>
 			</scroll-view>
 		</view>
+		<playerbar title="底部全局状态播放栏" color="black">底部全局状态播放栏</playerbar>
 	</view>
 </template>
 
 <script>
 	// 引入返回上一级、返回首页 头部组件
 	import musichead from '../../components/musichead/musichead.vue'
+	// 引入底部全局状态播放栏、
+	import playerbar from '../../components/playerbar/playerbar.vue'
 	// 引入 歌曲列表接口
 	import { list } from '../../common/api.js'
 	// 引入css绝对路径
@@ -72,9 +75,10 @@
 				isShow : false
 			}
 		},
-		// 注册组件
+		// 注册局部组件
 		components: {
-			musichead
+			musichead,
+			playerbar
 		},
 		// list接口是在onLoad()当中调用的
 		onLoad(playlist){
