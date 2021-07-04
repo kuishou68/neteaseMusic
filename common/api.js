@@ -4,7 +4,7 @@ export function topList(){
 	// 修改前，以前的接口依赖idx 
 	// var listIds = ['3' , '0' , '2' , '1' ];
 	// 修改后，id是不同版单的唯一值
-	var listIds = ['19723756' , '3779629' , '2884035' , '3778678' ];
+	var listIds = ['19723756' , '3779629' , '2884035' , '3778678'];
 	return new Promise(function(resolve,reject){
 		uni.request({
 			// 首页分类接口

@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import App from './App'
 import store from './store/index.js'
+// 引入底部导航组件
+import Footer  from 'components/song-footer/song-footer.vue'
+// 注册底部导航
+Vue.component('Footer', Footer)
 
 Vue.config.productionTip = false
 // 创建一个过滤器

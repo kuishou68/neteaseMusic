@@ -259,6 +259,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _musichead = _interopRequireDefault(__webpack_require__(/*! ../../components/musichead/musichead.vue */ 38));
 
 __webpack_require__(/*! ../../common/iconfont.css */ 19);
@@ -345,10 +346,11 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 20);function _interopR
 //
 //
 //
+//
 // 返回、回到首页
 // 引入css绝对路径
 // 引入API
-var _default = { data: function data() {return { songDetail: { al: { picUrl: '' } }, songSimi: [], songComment: [], songLyric: [], lyricIndex: 0, playicon: 'iconpause', // 播放状态
+var _default = { data: function data() {return { songDetail: { al: { picUrl: '' } }, songSimi: [], songComment: [], songLyric: [], lyricIndex: 0, playicon: 'icon-suspend_icon', // 播放状态
       isplayrotate: true, // 暂停状态
       isLoading: true // 加载状态
     };}, // 接收传递过来的歌曲id
@@ -366,10 +368,9 @@ var _default = { data: function data() {return { songDetail: { al: { picUrl: '' 
           _this.songLyric = result;} // 获取音频地址
         if (res[4][1].data.code == '200') {// 创建背景音频播放管理 实例
           _this.bgAudioMannager = uni.getBackgroundAudioManager();_this.bgAudioMannager.title = _this.songDetail.name;_this.bgAudioMannager.src = res[4][1].data.data[0].url;_this.listenLyricIndex(); // 监听播放状态事件
-          _this.bgAudioMannager.onPlay(function () {_this.playicon = 'iconpause';_this.isplayrotate = true;_this.listenLyricIndex();}); // 监听暂停状态事件
-          _this.bgAudioMannager.onPause(function () {_this.playicon = 'iconbofang1';_this.isplayrotate = false;_this.cancelLyricIndex();}); // 监听上一首歌播放完毕，自动播放下一首歌
-          _this.bgAudioMannager.onEnded(function () {_this.playMusic(_this.$store.state.nextId);});}
-        // 整个加载完成之后
+          _this.bgAudioMannager.onPlay(function () {_this.playicon = 'icon-suspend_icon';_this.isplayrotate = true;_this.listenLyricIndex();}); // 监听暂停状态事件
+          _this.bgAudioMannager.onPause(function () {_this.playicon = 'icon-bofang';_this.isplayrotate = false;_this.cancelLyricIndex();}); // 监听上一首歌播放完毕，自动播放下一首歌
+          _this.bgAudioMannager.onEnded(function () {_this.playMusic(_this.$store.state.nextId);});} // 整个加载完成之后
         _this.isLoading = false;
         uni.hideLoading();
       });

@@ -2,7 +2,6 @@
 	<view class="detail">
 		<view class="fixbg" :style="{backgroundImage:'url('+ songDetail.al.picUrl +')'}"></view>
 		<musichead  :title="songDetail.name" :icon="true" color="white"></musichead>
-
 		<view class="container" v-show="!isLoading">
 			<scroll-view scroll-y="true">
 				<!--播放转盘-->
@@ -47,7 +46,7 @@
 								</view>
 							</view>
 							<!--播放按钮-->
-							<text class="iconfont iconbofang"></text>
+							<text class="iconfont icon-bofang"></text>
 						</view>
 					</view>
 				</view>
@@ -66,7 +65,7 @@
 									<view>{{ item.time | formatTime }}</view>
 								</view>
 								<view class="detail-comment-like">
-									{{ item.likedCount | formatCount }} <text class="iconfont iconlike"></text>
+									{{ item.likedCount | formatCount }} <text class="iconfont icon-dianzan"></text>
 								</view>
 							</view>
 							<view class="detail-comment-text">
@@ -77,6 +76,8 @@
 				</view>
 			</scroll-view>
 		</view>
+		<!--底部全局状态播放栏-->
+		<Footer :barList="barList"></Footer>
 	</view>
 </template>
 
@@ -97,7 +98,7 @@
 				songComment : [],
 				songLyric : [],
 				lyricIndex : 0,
-				playicon : 'iconpause',// 播放状态
+				playicon : 'icon-suspend_icon',// 播放状态
 				isplayrotate : true,// 暂停状态
 				isLoading : true, // 加载状态
 			}
@@ -170,20 +171,20 @@
 							// 创建并返回内部 audio 上下文 innerAudioContext 对象
 							this.bgAudioMannager = uni.createInnerAudioContext();
 						}
-						this.playicon = 'iconbofang1';
+						this.playicon = 'icon-bofang';
 						this.isplayrotate = false;
 						// #endif
 						this.bgAudioMannager.src = res[4][1].data.data[0].url;
 						this.listenLyricIndex();
 						// 监听播放状态事件
 						this.bgAudioMannager.onPlay(()=>{
-							this.playicon = 'iconpause';
+							this.playicon = 'icon-suspend_icon';
 							this.isplayrotate = true;
 							this.listenLyricIndex();
 						});
 						// 监听暂停状态事件
 						this.bgAudioMannager.onPause(()=>{
-							this.playicon = 'iconbofang1';
+							this.playicon = 'icon-bofang';
 							this.isplayrotate = false;
 							this.cancelLyricIndex();
 						});

@@ -8,7 +8,7 @@
 					<view class="list-head-img">
 						<image :src="playlist.coverImgUrl" mode=""></image>
 						<!--浏览次数-->
-						<text class="iconfont iconyousanjiao">{{ playlist.playCount | formatCount }}</text>
+						<text class="iconfont icon-yousanjiao">{{ playlist.playCount | formatCount }}</text>
 					</view>
 					<view class="list-head-text">
 						<view>{{ playlist.name }}</view>
@@ -23,12 +23,14 @@
 				<!--差异化对待，只有微信能识别这个标签-->
 				<!-- #ifdef MP-WEIXIN -->
 				<button v-show="isShow" class="list-share" open-type="share">
-					<text class="iconfont iconicon-"></text>分享给微信好友
+					<!-- <text class="iconfont iconicon-"></text>分享给微信好友 -->
+					<text class="iconfont icon-fenxiang"></text>分享给微信好友
 				</button>
 				<!-- #endif -->
 				<view class="list-music">
 					<view v-show="isShow" class="list-music-title">
-						<text class="iconfont iconbofang1"></text>
+						<!-- <text class="iconfont iconbofang1"></text> -->
+						<text class="iconfont icon-arrow-"></text>
 						<text>播放全部</text>
 						<text>(共{{ playlist.trackCount }}首)</text>
 					</view>
@@ -44,20 +46,19 @@
 							</view>
 						</view>
 						<!--播放按钮-->
-						<text class="iconfont iconbofang"></text>
+						<text class="iconfont icon-bofang"></text>
 					</view>
 				</view>
 			</scroll-view>
 		</view>
-		<playerbar title="底部全局状态播放栏" color="black">底部全局状态播放栏</playerbar>
+		<!--底部全局状态播放栏-->
+		<Footer :barList="barList"></Footer>
 	</view>
 </template>
 
 <script>
 	// 引入返回上一级、返回首页 头部组件
 	import musichead from '../../components/musichead/musichead.vue'
-	// 引入底部全局状态播放栏、
-	import playerbar from '../../components/playerbar/playerbar.vue'
 	// 引入 歌曲列表接口
 	import { list } from '../../common/api.js'
 	// 引入css绝对路径
@@ -77,8 +78,7 @@
 		},
 		// 注册局部组件
 		components: {
-			musichead,
-			playerbar
+			musichead
 		},
 		// list接口是在onLoad()当中调用的
 		onLoad(playlist){

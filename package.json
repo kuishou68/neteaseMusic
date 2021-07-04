@@ -1,0 +1,10 @@
+{
+    "id": "song-footer",
+    "name": "footer",
+    "version": "1.0.0",
+    "description": "uniapp小程序底部导航组件",
+    "keywords": [
+        "uniapp",
+        "小程序"
+    ]
+}
