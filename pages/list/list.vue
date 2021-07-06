@@ -23,7 +23,6 @@
 				<!--差异化对待，只有微信能识别这个标签-->
 				<!-- #ifdef MP-WEIXIN -->
 				<button v-show="isShow" class="list-share" open-type="share">
-					<!-- <text class="iconfont iconicon-"></text>分享给微信好友 -->
 					<text class="iconfont icon-fenxiang"></text>分享给微信好友
 				</button>
 				<!-- #endif -->
@@ -52,17 +51,21 @@
 			</scroll-view>
 		</view>
 		<!--底部全局状态播放栏-->
-		<Footer :barList="barList"></Footer>
+		<Footer :src="songDetail.al.picUrl"  :title="songDetail.name" :singer="songDetail.ar[0].name" ></Footer>
 	</view>
 </template>
 
 <script>
 	// 引入返回上一级、返回首页 头部组件
 	import musichead from '../../components/musichead/musichead.vue'
-	// 引入 歌曲列表接口
-	import { list } from '../../common/api.js'
 	// 引入css绝对路径
 	import '../../common/iconfont.css'
+	// 引入 歌曲列表接口
+	import { list } from '../../common/api.js'
+	// 引入API
+	import { songDetail , songUrl , songLyric , songSimi , songComment  } from '../../common/api.js';
+	// 引入底部组件
+	import Footer from '../../components/song-footer/song-footer.vue'
 	export default {
 		data() {
 			return {
@@ -73,7 +76,7 @@
 					creator : ''
 				},
 				privileges : [],
-				isShow : false
+				isShow : false,
 			}
 		},
 		// 注册局部组件
@@ -82,7 +85,7 @@
 		},
 		// list接口是在onLoad()当中调用的
 		onLoad(playlist){
-			console.log(playlist);
+			// console.log(playlist);
 			// 修改前
 			// let listId = options.listId;
 			// 修改后，修改 options 为 playlist ，之前的idx是在options，现在榜单的id在playlist下
@@ -107,7 +110,7 @@
 				uni.navigateTo({
 					url: '/pages/detail/detail?songId=' + id
 				});
-			}
+			},
 		}
 	}
 </script>

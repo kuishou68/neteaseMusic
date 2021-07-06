@@ -1,14 +1,19 @@
 <template>
-	<view class="container ios-safe-area">
+	<view class="container ios-safe-area" @tap="handleToPlay">
 		<!--底部旋转图片-->
-		<image src="../../static/109951165806093811.jpg"></image>
+		<!-- <image src="../../static/109951165806093811.jpg" ></image>
 		<view class="player-info">
-			<text class="player-info-title" >半生雪半生雪半生雪半生雪半生雪半生雪半生雪半生雪</text><br/>
-			<text class="player-info-singer" >肖邦肖邦肖邦</text>
+			<text class="player-info-title" >111111111111111111111111111</text><br/>
+			<text class="player-info-singer" >2222222222222</text>
+		</view> -->
+		<image :src="src" mode=""></image>
+		<view class="player-info">
+			<text class="player-info-title" >{{ title }}</text><br/>
+			<text class="player-info-singer" >{{ singer }}</text>
 		</view>
-		<view class="player-controls">
+		<view class="player-controls" >
 			<!--播放按钮-->
-			<text class="player-controls-button1 iconfont icon-bofang"></text>
+			<text class="player-controls-button1 iconfont icon-bofang" @click="handleTo"></text>
 			<!--下一首-->
 			<text class="player-controls-button2 iconfont icon-kuaijin" ></text>
 			<!--列表播放-->
@@ -18,40 +23,44 @@
 </template>
 
 <script>
-	// 引入iconfont 样式
+	// 引入css绝对路径
 	import '../../common/iconfont.css'
-	// 引入API
+	// // 引入API
 	import { songDetail , songUrl , songLyric , songSimi , songComment  } from '../../common/api.js';
-	
+	// import { songDetail , songUrl } from '../../common/api.js';
 	export default {
-		name:"footer",
-		props:{
-			barList:{
-				type:Array,
-				default: []
-			}
-		},
 		data() {
 			return {
-				// clickIndex: uni.getStorageSync("currentFooterIndex"),
+				songDetail : {
+					al : { picUrl : '' },
+					ar : { name : '' }
+				},
+				// playicon : 'icon-suspend_icon',// 播放状态
+				// isplayrotate : true,// 暂停状态
 			};
 		},
-		methods:{
-			// onBarClick(item,index){
-			// 	this.clickIndex = index
-			// 	uni.setStorageSync("currentFooterIndex",index)
-			// 	uni.redirectTo({
-			// 		url:item.url,
-			// 	})
-			// }
-			getMusic(songId){
-				Promise.all([ songLyric(songId) ]).then((res)=>{
-					if( res[0][1].data.code == '200'){
-						console.log(res);
-					}
-				})
+		props : ['title','singer','src'],
+		onLoad(options) {
+			console.log("1111111111111");
+			this.playMusic(options.songId);
+		},
+		methods : {
+			playMusic(songId){
+				console.log("3333333333333");
+			},
+			handleTo(){
+				console.log("222222222");
 			}
-		}
+		},
+		// 监听点击播放
+		handleToPlay(){
+			// 如果是播放状态就开始播放
+			if(this.bgAudioMannager.paused){
+				this.bgAudioMannager.play();
+			}else{ // 否则暂停播放
+				this.bgAudioMannager.pause();
+			}
+		},
 	}
 </script>
 
@@ -75,11 +84,11 @@
 	/*播放控制*/
 	.player-controls{
 		/*播放按钮*/
-		.player-controls-button1{ font-size:35px;}
+		.player-controls-button1{ font-size:35px; color: #dd001b;}
 		/*下一首*/
-		.player-controls-button2{ font-size:34px; margin-left:15px; }
+		.player-controls-button2{ font-size:34px; margin-left:15px; color: #dd001b; }
 		/*列表播放*/
-		.player-controls-button3{ font-size:35px; margin-left:15px; margin-right: 10px;}
+		.player-controls-button3{ font-size:35px; margin-left:15px; margin-right: 10px; color: #dd001b;}
 	}
 
 }

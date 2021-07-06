@@ -196,14 +196,17 @@ to {
 }
 .container .player-controls .player-controls-button1.data-v-3ed8ddac {
   font-size: 35px;
+  color: #dd001b;
 }
 .container .player-controls .player-controls-button2.data-v-3ed8ddac {
   font-size: 34px;
   margin-left: 15px;
+  color: #dd001b;
 }
 .container .player-controls .player-controls-button3.data-v-3ed8ddac {
   font-size: 35px;
   margin-left: 15px;
   margin-right: 10px;
+  color: #dd001b;
 }
 

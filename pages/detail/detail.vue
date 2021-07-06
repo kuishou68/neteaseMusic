@@ -9,7 +9,6 @@
 					<!--网易云logo-->
 					<view>
 						<image src="../../static/logo.png" mode=""></image>
-						<!-- <text>网易云音乐</text> -->
 					</view>
 					<!--播放旋转臂-->
 					<view></view>
@@ -77,7 +76,7 @@
 			</scroll-view>
 		</view>
 		<!--底部全局状态播放栏-->
-		<Footer :barList="barList"></Footer>
+		<Footer :src="songDetail.al.picUrl"  :title="songDetail.name" :singer="songDetail.ar[0].name" ></Footer>
 	</view>
 </template>
 
@@ -88,11 +87,14 @@
 	import '../../common/iconfont.css'
 	// 引入API
 	import { songDetail , songUrl , songLyric , songSimi , songComment  } from '../../common/api.js';
+	// 引入底部
+	import Footer from '../../components/song-footer/song-footer.vue'
 	export default {
 		data() {
 			return {
 				songDetail : {
-					al : { picUrl : '' }
+					al : { picUrl : '' },
+					ar : { name : '' }
 				},
 				songSimi : [],
 				songComment : [],
@@ -105,6 +107,8 @@
 		},
 		// 接收传递过来的歌曲id
 		onLoad(options){
+			console.log('detail');
+			console.log(options);
 			// 等待加载
 			uni.showToast({
 				title:'正在加载...'

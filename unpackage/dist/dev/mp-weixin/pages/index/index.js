@@ -105,7 +105,7 @@ var components
 try {
   components = {
     musichead: function() {
-      return __webpack_require__.e(/*! import() | components/musichead/musichead */ "components/musichead/musichead").then(__webpack_require__.bind(null, /*! @/components/musichead/musichead.vue */ 38))
+      return __webpack_require__.e(/*! import() | components/musichead/musichead */ "components/musichead/musichead").then(__webpack_require__.bind(null, /*! @/components/musichead/musichead.vue */ 45))
     },
     mForSkeleton: function() {
       return __webpack_require__.e(/*! import() | components/m-for-skeleton/m-for-skeleton */ "components/m-for-skeleton/m-for-skeleton").then(__webpack_require__.bind(null, /*! @/components/m-for-skeleton/m-for-skeleton.vue */ 62))
@@ -238,7 +238,7 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__(/*! ../../common/iconfont.css */ 19);
 
-var _api = __webpack_require__(/*! ../../common/api.js */ 20);var musichead = function musichead() {__webpack_require__.e(/*! require.ensure | components/musichead/musichead */ "components/musichead/musichead").then((function () {return resolve(__webpack_require__(/*! ../../components/musichead/musichead.vue */ 38));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Footer = function Footer() {Promise.all(/*! require.ensure | components/song-footer/song-footer */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/song-footer/song-footer")]).then((function () {return resolve(__webpack_require__(/*! components/song-footer/song-footer.vue */ 55));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mForSkeleton = function mForSkeleton() {__webpack_require__.e(/*! require.ensure | components/m-for-skeleton/m-for-skeleton */ "components/m-for-skeleton/m-for-skeleton").then((function () {return resolve(__webpack_require__(/*! @/components/m-for-skeleton/m-for-skeleton */ 62));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _api = __webpack_require__(/*! ../../common/api.js */ 20);var musichead = function musichead() {__webpack_require__.e(/*! require.ensure | components/musichead/musichead */ "components/musichead/musichead").then((function () {return resolve(__webpack_require__(/*! ../../components/musichead/musichead.vue */ 45));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var Footer = function Footer() {Promise.all(/*! require.ensure | components/song-footer/song-footer */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/song-footer/song-footer")]).then((function () {return resolve(__webpack_require__(/*! components/song-footer/song-footer.vue */ 30));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mForSkeleton = function mForSkeleton() {__webpack_require__.e(/*! require.ensure | components/m-for-skeleton/m-for-skeleton */ "components/m-for-skeleton/m-for-skeleton").then((function () {return resolve(__webpack_require__(/*! @/components/m-for-skeleton/m-for-skeleton */ 62));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
 {

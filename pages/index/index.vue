@@ -42,7 +42,7 @@
 			</scroll-view>
 		</view>
 		<!--底部全局状态播放栏-->
-		<!-- <Footer :barList="barList"></Footer> -->
+		<!-- <Footer ></Footer> -->
 	</view>
 </template>
 
