@@ -1,5 +1,5 @@
 <template>
-	<view class="container ios-safe-area" @tap="handleToPlay">
+	<view class="container ios-safe-area">
 		<!--底部旋转图片-->
 		<!-- <image src="../../static/109951165806093811.jpg" ></image>
 		<view class="player-info">
@@ -11,9 +11,9 @@
 			<text class="player-info-title" >{{ title }}</text><br/>
 			<text class="player-info-singer" >{{ singer }}</text>
 		</view>
-		<view class="player-controls" >
+		<view class="player-controls" @tap="handleToPlay">
 			<!--播放按钮-->
-			<text class="player-controls-button1 iconfont icon-bofang" @click="handleTo"></text>
+			<text class="player-controls-button1 iconfont icon-bofang" ></text>
 			<!--下一首-->
 			<text class="player-controls-button2 iconfont icon-kuaijin" ></text>
 			<!--列表播放-->
@@ -27,7 +27,8 @@
 	import '../../common/iconfont.css'
 	// // 引入API
 	import { songDetail , songUrl , songLyric , songSimi , songComment  } from '../../common/api.js';
-	// import { songDetail , songUrl } from '../../common/api.js';
+	// import { songDetail , songUrl } from '../../common/api.js'
+	
 	export default {
 		data() {
 			return {
@@ -39,28 +40,21 @@
 				// isplayrotate : true,// 暂停状态
 			};
 		},
+		// 自定义组件属性
 		props : ['title','singer','src'],
-		onLoad(options) {
-			console.log("1111111111111");
-			this.playMusic(options.songId);
-		},
 		methods : {
-			playMusic(songId){
-				console.log("3333333333333");
+			// 监听点击播放
+			handleToPlay(){
+				console.log("被点击");
+				// 如果是播放状态就开始播放
+				if(this.bgAudioMannager.paused){
+					this.bgAudioMannager.play();
+				}else{ // 否则暂停播放
+					this.bgAudioMannager.pause();
+				}
 			},
-			handleTo(){
-				console.log("222222222");
-			}
 		},
-		// 监听点击播放
-		handleToPlay(){
-			// 如果是播放状态就开始播放
-			if(this.bgAudioMannager.paused){
-				this.bgAudioMannager.play();
-			}else{ // 否则暂停播放
-				this.bgAudioMannager.pause();
-			}
-		},
+		
 	}
 </script>
 

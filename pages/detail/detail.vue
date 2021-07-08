@@ -81,13 +81,13 @@
 </template>
 
 <script>
-	// 返回、回到首页
+	// 引入返回上一级、返回首页 头部组件
 	import musichead from '../../components/musichead/musichead.vue'
 	// 引入css绝对路径
 	import '../../common/iconfont.css'
 	// 引入API
 	import { songDetail , songUrl , songLyric , songSimi , songComment  } from '../../common/api.js';
-	// 引入底部
+	// 引入底部组件
 	import Footer from '../../components/song-footer/song-footer.vue'
 	export default {
 		data() {
@@ -107,8 +107,6 @@
 		},
 		// 接收传递过来的歌曲id
 		onLoad(options){
-			console.log('detail');
-			console.log(options);
 			// 等待加载
 			uni.showToast({
 				title:'正在加载...'

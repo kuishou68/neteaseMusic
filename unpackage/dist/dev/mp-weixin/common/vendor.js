@@ -9290,7 +9290,12 @@ var index = {
 /* 16 */,
 /* 17 */,
 /* 18 */,
-/* 19 */
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */
 /*!*******************************************************!*\
   !*** D:/Code/uniapp/neteaseMusic/common/iconfont.css ***!
   \*******************************************************/
@@ -9302,7 +9307,7 @@ var index = {
   
 
 /***/ }),
-/* 20 */
+/* 25 */
 /*!*************************************************!*\
   !*** D:/Code/uniapp/neteaseMusic/common/api.js ***!
   \*************************************************/
@@ -9310,7 +9315,7 @@ var index = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.topList = topList;exports.list = list;exports.songDetail = songDetail;exports.songUrl = songUrl;exports.songLyric = songLyric;exports.songSimi = songSimi;exports.songComment = songComment;exports.searchHot = searchHot;exports.searchWord = searchWord;exports.searchSuggest = searchSuggest;var _config = __webpack_require__(/*! ./config.js */ 21);
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.topList = topList;exports.list = list;exports.songDetail = songDetail;exports.songUrl = songUrl;exports.songLyric = songLyric;exports.songSimi = songSimi;exports.songComment = songComment;exports.searchHot = searchHot;exports.searchWord = searchWord;exports.searchSuggest = searchSuggest;var _config = __webpack_require__(/*! ./config.js */ 26);
 // 请求接口
 function topList() {
   // 修改前，以前的接口依赖idx 
@@ -9411,7 +9416,7 @@ function searchSuggest(word) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 21 */
+/* 26 */
 /*!****************************************************!*\
   !*** D:/Code/uniapp/neteaseMusic/common/config.js ***!
   \****************************************************/

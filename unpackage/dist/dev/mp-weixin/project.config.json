@@ -30,22 +30,34 @@
       "current": 0,
       "list": [
         {
+          "name": "index",
+          "query": " ",
+          "id": 0,
+          "pathName": "pages/index/index"
+        },
+        {
           "name": "list",
           "query": "id=19723756",
-          "id": 0,
+          "id": 1,
           "pathName": "pages/list/list"
         },
         {
           "name": "detail",
           "query": "songId=483937795",
-          "id": 1,
+          "id": 2,
           "pathName": "pages/detail/detail"
         },
         {
           "name": "search",
           "query": "",
-          "id": 2,
+          "id": 3,
           "pathName": "pages/search/search"
+        },
+        {
+          "name": "login",
+          "query": "",
+          "id": 4,
+          "pathName": "pages/login/login"
         }
       ]
     }

@@ -28,8 +28,8 @@
 				<!-- #endif -->
 				<view class="list-music">
 					<view v-show="isShow" class="list-music-title">
-						<!-- <text class="iconfont iconbofang1"></text> -->
-						<text class="iconfont icon-arrow-"></text>
+						<!-- 🔔播放全部还未实现循环播放歌单🔔 -->
+						<text class="iconfont icon-arrow-" ></text>
 						<text>播放全部</text>
 						<text>(共{{ playlist.trackCount }}首)</text>
 					</view>
@@ -51,7 +51,7 @@
 			</scroll-view>
 		</view>
 		<!--底部全局状态播放栏-->
-		<Footer :src="songDetail.al.picUrl"  :title="songDetail.name" :singer="songDetail.ar[0].name" ></Footer>
+<!-- 		<Footer :src="songDetail.al.picUrl"  :title="songDetail.name" :singer="songDetail.ar[0].name" ></Footer> -->
 	</view>
 </template>
 
@@ -61,9 +61,7 @@
 	// 引入css绝对路径
 	import '../../common/iconfont.css'
 	// 引入 歌曲列表接口
-	import { list } from '../../common/api.js'
-	// 引入API
-	import { songDetail , songUrl , songLyric , songSimi , songComment  } from '../../common/api.js';
+	import { list , songDetail , songUrl } from '../../common/api.js'
 	// 引入底部组件
 	import Footer from '../../components/song-footer/song-footer.vue'
 	export default {
@@ -77,13 +75,19 @@
 				},
 				privileges : [],
 				isShow : false,
+				// 底部播放栏
+				// songDetail : {
+				// 	al : { picUrl : '' },
+				// 	ar : { name : '' },
+				// }
 			}
 		},
 		// 注册局部组件
 		components: {
-			musichead
+			musichead,
+			// Footer
 		},
-		// list接口是在onLoad()当中调用的
+		// list接口是在onLoad()当中调用的,接收上一个页面传递过来的ID
 		onLoad(playlist){
 			// console.log(playlist);
 			// 修改前
@@ -103,14 +107,60 @@
 					this.isShow = true;
 				}
 			});
+
 		},
 		// 播放接口，点击之后传递songId出去
 		methods: {
 			handleToDetail(id){
+				// 传递ID 的同时播放音乐
 				uni.navigateTo({
 					url: '/pages/detail/detail?songId=' + id
 				});
+				// Promise.all([songDetail(id), songUrl(id)]).then((res)=>{
+				// 	console.log("11111111");
+				// 	if(res[0][1].data.code == '200'){
+				// 		console.log("22222222");
+				// 		this.songDetail = res[0][1].data.songs[0];
+				// 	}
+				// 	// 获取音频地址
+				// 	if(res[1][1].data.code == '200'){
+				// 		console.log("333333333");
+				// 		// 创建背景音频播放管理 实例
+				// 		// #ifdef MP-WEIXIN
+				// 		this.bgAudioMannager = uni.getBackgroundAudioManager();
+				// 		this.bgAudioMannager.title = this.songDetail.name;
+				// 		// #endif
+				// 		// #ifdef H5
+				// 		if(!this.bgAudioMannager){
+				// 			// 创建并返回内部 audio 上下文 innerAudioContext 对象
+				// 			this.bgAudioMannager = uni.createInnerAudioContext();
+				// 		}
+				// 		this.playicon = 'icon-bofang';
+				// 		this.isplayrotate = false;
+				// 		// #endif
+				// 		this.bgAudioMannager.src = res[4][1].data.data[0].url;
+				// 		this.listenLyricIndex();
+				// 		// 监听播放状态事件
+				// 		this.bgAudioMannager.onPlay(()=>{
+				// 			this.playicon = 'icon-suspend_icon';
+				// 			this.isplayrotate = true;
+				// 			this.listenLyricIndex();
+				// 		});
+				// 		// 监听暂停状态事件
+				// 		this.bgAudioMannager.onPause(()=>{
+				// 			this.playicon = 'icon-bofang';
+				// 			this.isplayrotate = false;
+				// 			this.cancelLyricIndex();
+				// 		});
+				// 		// 监听上一首歌播放完毕，自动播放下一首歌
+				// 		this.bgAudioMannager.onEnded(()=>{
+				// 			this.playMusic(this.$store.state.nextId);
+				// 		});
+				// 	}
+					
+				// })
 			},
+			
 		}
 	}
 </script>
