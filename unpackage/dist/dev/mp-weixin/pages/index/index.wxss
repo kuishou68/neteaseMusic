@@ -353,67 +353,16 @@ to {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*登录*/
 .index-login{ margin: auto; width:379px;
 }
-.index-login-img{ font-size:34px; vertical-align: middle; color:#dddddd;}
-.idnex-login-text{ font-size:14px; margin-left: 10px; color:#888;
+.index-login-left{ width:35px; height:35px;  position: absolute; overflow: hidden; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAOESURBVFhHtZh5TzIxEMa764UiQRGVgDH4B9//Axm5FBPjfXAIKvIbO7y47HbLKzxJ49J2Zp6ZTqetwXgCswA+Pj7M29ubeX9/l/b19SUtDENpW1tb0nZ3d836+rqV8oM3mcfHR2mQCYJg2qJAnTbI7O/vS/NBKpnn52dzc3MjhvEcxJGIQtUSNb6Pj49NPp+XviQ4ybTbbTMYDMza2poXgSRg4vPz02QyGXN6emp75xFLhqWo1+vTPFgWNL/Ozs7MxsaG7f2HOTKj0cg0Go3UaCBGQ7kC4sikyRGlOEJzZM7Pz6dKk6B5cHBwYHZ2diRRiWav1zP39/ci64qoOlGr1WzPD36RaTabotSlCK+y2awpl8u2Zx6dTkeIEd0kQAYnqtWq7ZlE1v41T09PZjgcOomgYHt720kEVCoVidjsEkaBHexhVzG1fHt76/SEANJOTk5sjxsQUpkkYA+7CiHDOoO0xMvlcvaXH5jvIqP21L6QobK6lgeglFxZBCyViwzALvblm3VjbV1RUaQRjsK17ArsYl/ylaz3IQLYaYuAmuUD7MMjpNz7kGHOy8uL/eWH19dXb93wCPUUTgNz+v2+t7fMY76vbqlvvqFHgBzg8PTB5eWlzPchA4SM/fYCitkdFxcXcrGKA/2M+26KWQSTQ3FMiV9EEELIcKNjuxMBfne7XSGzSEQA+kSm1WqNWd80YQSiNSPah46onri+KNCxublpguvr6zEeJdUQJuI14xQxX69Vji3LkrnkGCfCwaT6jZPOJZRxspZKJTkg/xcQ4upKksbZgQzXkTCpZCO4t7cnl6C/EAHYQA934LjdCxnmhKwVbGcJERGIHB4e2p7l4OjoSF4K6FdgF/tsBkkUJsBOB1kaBFcBHES/Oo9dHAdCplAoyCCNQXJklUA/dpQQ+QKmWwjGGr6/5kgaVD/2isWifIMpGZZKb+uU8lVCjxTszb42fxUXMp7QccBN6o/tXS6urq6kSmMHe7P4RQboBB73y44QEcFR8mX2VaCIfVHqQ46KSeXlNfCXPNJIa9LisNeLUkE37yiI8U1RIsl5L/uCCxPVXW+TECAiScdCIhnFw8ODubu7s79+7rXc+iFHoaJmoBw1VFfyAePc8nR3Ms6uSfvXSCoZBc8JbvGE2geoJRIUNOqYD7zJKLjFc8qzBCwh3kMQ74kaxwv5xSkclxfJMOYbnKBso2A1p/wAAAAASUVORK5CYII=);
+}
+.index-login-left-img{ width:35px; height:35px;  border-radius: 50%;
+}
+.index-login-img-text{ font-size:34px; color:#dddddd;
+}
+.idnex-login-text{ font-size:14px; vertical-align: sub; margin-left: 45px; color:#888;
 }
 .index-login button{ float:right; border:1px #dddddd solid; border-radius: 30px;
 }

@@ -5,14 +5,13 @@
 			<scroll-view scroll-y="true">
 				<!--登录-->
 				<view class="index-login">
-					<!--icon-yonghu-->
-					<text class="index-login-img iconfont icon-yonghu" :src="userInfo.avatarUrl || '../static/wangyiyunyinyue.png'"></text>
-					<text class="idnex-login-text" @click="toLogin">{{ hasLogin ? userInfo.nickName || '未设置昵称' : '立即登录' }}</text>
-					<!--#ifdef MP-WEIXIN-->
-						<!--使用button登录授权登录必备参数 open-type="getUserInfo"-->
-					<button type="sumbit" plain="true" size="mini" open-type="getUserInfo" @getuserinfo="getuserinfo" withCredentials="true">立即登录</button>
-					<!-- <button class="confirm-btn" open-type="getUserInfo" @getuserinfo="wxLogin" :disabled="logining">微信授权登录</button> -->
-					
+					<view class="index-login-left">
+						<image class="index-login-left-img" :src="userInfo.avatarUrl"></image>
+					</view>
+					<text class="idnex-login-text">{{ userInfo.nickName ||  '未登录' }}</text>
+					<!--#ifdef MP-WEIXIN-->	
+						<button type="sumbit" plain="true" size="mini" open-type="getUserInfo" @tap="login" @click="change" >{{ logState }}</button>
+						<!-- <button type="sumbit" plain="true" size="mini" open-type="getUserInfo"  v-text="logState" v-show="flag==false">{{ logState }}</button> -->
 					<!--#endif-->
 				</view>
 				<!--搜索栏-->
@@ -47,8 +46,6 @@
 				</view>
 			</scroll-view>
 		</view>
-		<!--底部全局状态播放栏-->
-		<!-- <Footer ></Footer> -->
 	</view>
 </template>
 
@@ -63,18 +60,14 @@
 	import { topList } from '../../common/api.js'
 	// 导入循环骨架屏
 	import mForSkeleton from "@/components/m-for-skeleton/m-for-skeleton"
-	// 引入vuex
-	import { mapState } from 'vuex';
 
 	export default {
 		data() {
 			return {
 				topList : [],
 				loading: true,
-				// 微信登录信息
-				// appid : 'wx5635f2f0e6d49c80',
-				// secret : '2a08bf4ccc5e158234de59a0a300dda4',
-				// code : ''
+				userInfo : {},
+				logState : '立即登录',
 			};
 		},
 		// 局部组件
@@ -84,18 +77,6 @@
 		},
 		// 等整个页面加载完之后触发的
 		onLoad() {
-			// 登录
-			// _self = this,
-			// // 验证登录
-			// wx.getSetting({
-			// 	success(res){
-			// 		if(res.authSetting['scope.userInfo']){
-			// 			console.log('登录成功！');
-			// 		}else{
-			// 			console.log('未登录！');
-			// 		}
-			// 	}
-			// });
 			// 首页内容加载
 			topList().then((res)=>{
 				if(res.length){
@@ -106,9 +87,6 @@
 				}
 			});
 			
-		},
-		computed: {
-		       ...mapState(['hasLogin', 'userInfo'])
 		},
 		methods: {
 			// 调转到list.vue播放页面
@@ -123,75 +101,41 @@
 					url: '/pages/search/search'
 				});
 			},
-			toLogin() {
-			            if (!this.hasLogin) {
-			                uni.navigateTo({
-			                    url: 'pages/login/login'
-			                });
-			            }
-			        }
-			// 登录  
-			// getuserinfo : function(res1){
-			//    console.log(res1);
-			  //  console.log(res1.detail.userInfo.avatarUrl);
-			  //  console.log(res1.detail.userInfo.nickName);
-			  //  //如果只需要opendid 和非加密数据至此登录完成
-			  //  //此处连接数据库利用openid 就可以进行登录环节
-			  //  wx.login({
-			  //   success:function(res2){
-			  //    //获取 sessionKey
-			  //    wx.request({
-				 //  url : 'https:///hoa.hcoder.net/xcxencode/?c=sk&appid=wxbb7f9f1f2c6f4f33&secret=739b970b832f0df158f54c494a08e440&code='+res2.code,
-			  //     // url : 'https:///hoa.hcoder.net/xcxencode/?c=sk&appid='+ this.appid +'&secret='+ this.secret +'&code='+this.code,
-			  //     success:function(res3){
-			  //      console.log(res3);
-				 
-			  //      // sk和openid 信息记录到本地
-			  //      try{
-			  //       uni.setStorageSync('sk', res3.data.session_key);
-			  //       uni.setStorageSync('openid', res3.data.openid);
-			  //      }catch(e){
-			  //       //TODO handle the exception
-			  //      }
-				 
-			       // uni.hideLoading();
-			       // //以下步骤可以获取加密信息，需要授权
-			       // //获取加密信息
-			       // if(!res1.detail.iv){
-			       //  uni.showToast({
-			       //   title:"您取消了授权,登录失败",
-			       //   icon:"none"
-			       //  });
-			       //  return false;
-			       // }
-			       // try{
-			       //  var sessionKey = uni.getStorageSync('sk');
-			       //  console.log(sessionKey);
-			       // }catch(e){
-			       //  //TODO handle the exception
-			       // }
-			       // uni.request({
-			       //  method : "POST",
-			       //  url : 'https:///hoa.hcoder.net/xcxencode/',
-			       //  header : {'content-type':'application/x-www-form-urlencoded'},
-			       //  data : {
-			       //   appid : "wx5635f2f0e6d49c80",
-			       //   sessionKey : sessionKey,
-			       //   iv : res1.detail.iv,
-			       //   encryptedData : res1.detail.encryptedData
-			       //  },
-			       //  success:function(res4){
-			       //   console.log(res4);
-			         
-			       //  }
-			       // });
-				   
-			  //     }
-			  //    })
-			  //   }
-			  //  });
-			  // }
-				  
+			// 登录部分
+			login(){
+				// 获取code 小程序专有，用户登录凭证。
+				uni.getUserProfile({
+					desc: "获取用户基本资料",
+					success : (res)=>{
+						this.userInfo = res.userInfo;
+					},
+					// 用户取消登录后的提示
+					fail: (res)=>{
+						uni.showModal({
+							title:"授权用户信息失败！",
+							// 是否显示取消按钮，默认为 true
+							showCancel:false
+						})
+					}
+				})
+				//获取成功基本资料后开启登录，基本资料首先要授权
+				uni.login({
+					provider : 'weixin',
+					success : (res)=>{
+						console.log(res);
+						if(res.errMsg == "login:ok"){
+							let code =res.code;
+							console.log(code);
+						}
+					}
+				})
+			},
+			// 退出登录
+			change(){
+				// 这里只是改变了按钮文字内容，真正退出需要清除token，回到首页,还没找到头绪怎么做
+				this.logState = '已登录';
+				
+			}
 		}
 	}
 </script>
@@ -199,8 +143,10 @@
 <style>
 	/*登录*/
 	.index-login{ margin: auto; width:379px; }
-	.index-login-img{ font-size:34px; vertical-align: middle; color:#dddddd;}
-	.idnex-login-text{ font-size:14px; margin-left: 10px; color:#888; }
+	.index-login-left{ width:35px; height:35px;  position: absolute; overflow: hidden; background: url(../../static/user.png); }
+	.index-login-left-img{ width:35px; height:35px;  border-radius: 50%; }
+	.index-login-img-text{ font-size:34px; color:#dddddd; }
+	.idnex-login-text{ font-size:14px; vertical-align: sub; margin-left: 45px; color:#888; }
 	.index-login button{ float:right; border:1px #dddddd solid; border-radius: 30px; }
 	/*搜索栏*/
 	.index-search{ display: flex; background:#f7f7f7; height:73rpx; margin:30rpx; border-radius: 50rpx; align-items: center;}

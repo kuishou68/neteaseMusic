@@ -108,7 +108,7 @@ try {
       return __webpack_require__.e(/*! import() | components/musichead/musichead */ "components/musichead/musichead").then(__webpack_require__.bind(null, /*! @/components/musichead/musichead.vue */ 45))
     },
     mForSkeleton: function() {
-      return __webpack_require__.e(/*! import() | components/m-for-skeleton/m-for-skeleton */ "components/m-for-skeleton/m-for-skeleton").then(__webpack_require__.bind(null, /*! @/components/m-for-skeleton/m-for-skeleton.vue */ 68))
+      return __webpack_require__.e(/*! import() | components/m-for-skeleton/m-for-skeleton */ "components/m-for-skeleton/m-for-skeleton").then(__webpack_require__.bind(null, /*! @/components/m-for-skeleton/m-for-skeleton.vue */ 62))
     }
   }
 } catch (e) {
@@ -237,29 +237,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 var _songFooter = _interopRequireDefault(__webpack_require__(/*! components/song-footer/song-footer.vue */ 19));
 
 __webpack_require__(/*! ../../common/iconfont.css */ 24);
 
-var _api = __webpack_require__(/*! ../../common/api.js */ 25);
+var _api = __webpack_require__(/*! ../../common/api.js */ 25);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var musichead = function musichead() {__webpack_require__.e(/*! require.ensure | components/musichead/musichead */ "components/musichead/musichead").then((function () {return resolve(__webpack_require__(/*! ../../components/musichead/musichead.vue */ 45));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mForSkeleton = function mForSkeleton() {__webpack_require__.e(/*! require.ensure | components/m-for-skeleton/m-for-skeleton */ "components/m-for-skeleton/m-for-skeleton").then((function () {return resolve(__webpack_require__(/*! @/components/m-for-skeleton/m-for-skeleton */ 62));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 
-
-var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var musichead = function musichead() {__webpack_require__.e(/*! require.ensure | components/musichead/musichead */ "components/musichead/musichead").then((function () {return resolve(__webpack_require__(/*! ../../components/musichead/musichead.vue */ 45));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var mForSkeleton = function mForSkeleton() {__webpack_require__.e(/*! require.ensure | components/m-for-skeleton/m-for-skeleton */ "components/m-for-skeleton/m-for-skeleton").then((function () {return resolve(__webpack_require__(/*! @/components/m-for-skeleton/m-for-skeleton */ 68));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
 {
   data: function data() {
     return {
       topList: [],
-      loading: true
-      // 微信登录信息
-      // appid : 'wx5635f2f0e6d49c80',
-      // secret : '2a08bf4ccc5e158234de59a0a300dda4',
-      // code : ''
-    };
+      loading: true,
+      userInfo: {},
+      logState: '立即登录' };
+
   },
   // 局部组件
   components: {
@@ -268,18 +261,6 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
 
   // 等整个页面加载完之后触发的
   onLoad: function onLoad() {var _this = this;
-    // 登录
-    // _self = this,
-    // // 验证登录
-    // wx.getSetting({
-    // 	success(res){
-    // 		if(res.authSetting['scope.userInfo']){
-    // 			console.log('登录成功！');
-    // 		}else{
-    // 			console.log('未登录！');
-    // 		}
-    // 	}
-    // });
     // 首页内容加载
     (0, _api.topList)().then(function (res) {
       if (res.length) {
@@ -291,9 +272,6 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
     });
 
   },
-  computed: _objectSpread({},
-  (0, _vuex.mapState)(['hasLogin', 'userInfo'])),
-
   methods: {
     // 调转到list.vue播放页面
     handleToList: function handleToList(listId) {
@@ -307,75 +285,41 @@ var _vuex = __webpack_require__(/*! vuex */ 12);function _interopRequireDefault(
         url: '/pages/search/search' });
 
     },
-    toLogin: function toLogin() {
-      if (!this.hasLogin) {
-        uni.navigateTo({
-          url: 'pages/login/login' });
+    // 登录部分
+    login: function login() {var _this2 = this;
+      // 获取code 小程序专有，用户登录凭证。
+      uni.getUserProfile({
+        desc: "获取用户基本资料",
+        success: function success(res) {
+          _this2.userInfo = res.userInfo;
+        },
+        // 用户取消登录后的提示
+        fail: function fail(res) {
+          uni.showModal({
+            title: "授权用户信息失败！",
+            // 是否显示取消按钮，默认为 true
+            showCancel: false });
 
-      }
-    }
-    // 登录  
-    // getuserinfo : function(res1){
-    //    console.log(res1);
-    //  console.log(res1.detail.userInfo.avatarUrl);
-    //  console.log(res1.detail.userInfo.nickName);
-    //  //如果只需要opendid 和非加密数据至此登录完成
-    //  //此处连接数据库利用openid 就可以进行登录环节
-    //  wx.login({
-    //   success:function(res2){
-    //    //获取 sessionKey
-    //    wx.request({
-    //  url : 'https:///hoa.hcoder.net/xcxencode/?c=sk&appid=wxbb7f9f1f2c6f4f33&secret=739b970b832f0df158f54c494a08e440&code='+res2.code,
-    //     // url : 'https:///hoa.hcoder.net/xcxencode/?c=sk&appid='+ this.appid +'&secret='+ this.secret +'&code='+this.code,
-    //     success:function(res3){
-    //      console.log(res3);
+        } });
 
-    //      // sk和openid 信息记录到本地
-    //      try{
-    //       uni.setStorageSync('sk', res3.data.session_key);
-    //       uni.setStorageSync('openid', res3.data.openid);
-    //      }catch(e){
-    //       //TODO handle the exception
-    //      }
+      //获取成功基本资料后开启登录，基本资料首先要授权
+      uni.login({
+        provider: 'weixin',
+        success: function success(res) {
+          console.log(res);
+          if (res.errMsg == "login:ok") {
+            var code = res.code;
+            console.log(code);
+          }
+        } });
 
-    // uni.hideLoading();
-    // //以下步骤可以获取加密信息，需要授权
-    // //获取加密信息
-    // if(!res1.detail.iv){
-    //  uni.showToast({
-    //   title:"您取消了授权,登录失败",
-    //   icon:"none"
-    //  });
-    //  return false;
-    // }
-    // try{
-    //  var sessionKey = uni.getStorageSync('sk');
-    //  console.log(sessionKey);
-    // }catch(e){
-    //  //TODO handle the exception
-    // }
-    // uni.request({
-    //  method : "POST",
-    //  url : 'https:///hoa.hcoder.net/xcxencode/',
-    //  header : {'content-type':'application/x-www-form-urlencoded'},
-    //  data : {
-    //   appid : "wx5635f2f0e6d49c80",
-    //   sessionKey : sessionKey,
-    //   iv : res1.detail.iv,
-    //   encryptedData : res1.detail.encryptedData
-    //  },
-    //  success:function(res4){
-    //   console.log(res4);
+    },
+    // 退出登录
+    change: function change() {
+      // 这里只是改变了按钮文字内容，真正退出需要清除token，回到首页,还没找到头绪怎么做
+      this.logState = '已登录';
 
-    //  }
-    // });
-
-    //     }
-    //    })
-    //   }
-    //  });
-    // }
-  } };exports.default = _default;
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
@@ -510,11 +454,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-
-
-
-
-
 __webpack_require__(/*! ../../common/iconfont.css */ 24);
 
 var _api = __webpack_require__(/*! ../../common/api.js */ 25); //
@@ -536,21 +475,22 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 25); //
 //
 //
 //
-//
-//
-//
-//
-//
 // 引入css绝对路径
-// // 引入API
-// import { songDetail , songUrl } from '../../common/api.js'
+// 引入API
 var _default = { data: function data() {return { songDetail: { al: { picUrl: '' }, ar: { name: '' } } // playicon : 'icon-suspend_icon',// 播放状态
       // isplayrotate : true,// 暂停状态
     };}, // 自定义组件属性
-  props: ['title', 'singer', 'src'], methods: { // 监听点击播放
-    handleToPlay: function handleToPlay() {console.log("被点击"); // 如果是播放状态就开始播放
-      if (this.bgAudioMannager.paused) {this.bgAudioMannager.play();} else {// 否则暂停播放
-        this.bgAudioMannager.pause();}} } };exports.default = _default;
+  props: ['title', 'singer', 'src'], methods: {// // 监听点击播放
+    // handleToPlay(){
+    // 	console.log("被点击");
+    // 	// 如果是播放状态就开始播放
+    // 	if(this.bgAudioMannager.paused){
+    // 		this.bgAudioMannager.play();
+    // 	}else{ // 否则暂停播放
+    // 		this.bgAudioMannager.pause();
+    // 	}
+    // },
+  } };exports.default = _default;
 
 /***/ }),
 /* 24 */,

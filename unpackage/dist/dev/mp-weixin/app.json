@@ -3,8 +3,7 @@
     "pages/index/index",
     "pages/list/list",
     "pages/detail/detail",
-    "pages/search/search",
-    "pages/login/login"
+    "pages/search/search"
   ],
   "subPackages": [],
   "window": {
@@ -18,5 +17,6 @@
   ],
   "usingComponents": {
     "footer": "/components/song-footer/song-footer"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

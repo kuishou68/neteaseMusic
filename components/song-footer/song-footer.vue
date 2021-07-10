@@ -1,11 +1,6 @@
 <template>
 	<view class="container ios-safe-area">
-		<!--底部旋转图片-->
-		<!-- <image src="../../static/109951165806093811.jpg" ></image>
-		<view class="player-info">
-			<text class="player-info-title" >111111111111111111111111111</text><br/>
-			<text class="player-info-singer" >2222222222222</text>
-		</view> -->
+		<!--底部播放栏-->
 		<image :src="src" mode=""></image>
 		<view class="player-info">
 			<text class="player-info-title" >{{ title }}</text><br/>
@@ -13,7 +8,7 @@
 		</view>
 		<view class="player-controls" @tap="handleToPlay">
 			<!--播放按钮-->
-			<text class="player-controls-button1 iconfont icon-bofang" ></text>
+			<text class="player-controls-button1 iconfont icon-bofang" :class="playicon"></text>
 			<!--下一首-->
 			<text class="player-controls-button2 iconfont icon-kuaijin" ></text>
 			<!--列表播放-->
@@ -25,10 +20,9 @@
 <script>
 	// 引入css绝对路径
 	import '../../common/iconfont.css'
-	// // 引入API
+	// 引入API
 	import { songDetail , songUrl , songLyric , songSimi , songComment  } from '../../common/api.js';
-	// import { songDetail , songUrl } from '../../common/api.js'
-	
+
 	export default {
 		data() {
 			return {
@@ -43,16 +37,16 @@
 		// 自定义组件属性
 		props : ['title','singer','src'],
 		methods : {
-			// 监听点击播放
-			handleToPlay(){
-				console.log("被点击");
-				// 如果是播放状态就开始播放
-				if(this.bgAudioMannager.paused){
-					this.bgAudioMannager.play();
-				}else{ // 否则暂停播放
-					this.bgAudioMannager.pause();
-				}
-			},
+			// // 监听点击播放
+			// handleToPlay(){
+			// 	console.log("被点击");
+			// 	// 如果是播放状态就开始播放
+			// 	if(this.bgAudioMannager.paused){
+			// 		this.bgAudioMannager.play();
+			// 	}else{ // 否则暂停播放
+			// 		this.bgAudioMannager.pause();
+			// 	}
+			// },
 		},
 		
 	}
@@ -61,7 +55,7 @@
 <style lang="scss" scoped>
 .container {position: fixed; bottom: 0; left: 0; width: 100%; height: 98rpx; background: #FFFFFF; box-shadow: 0 2rpx 40rpx 0 rgba(0, 0, 0, 0.18); display: flex; justify-content: space-around; align-items: center; z-index: 9999;
 	/*旋转图片*/
-	image{width: 58px;height: 58px;left: 0;top: 0;right: 345px;bottom: 0;margin: auto;position: fixed;margin-bottom: 0px;border-radius: 50%;animation: 10s linear infinite move;animation-play-state: paused;}
+	image{ width: 58px;height: 58px;left: 0;top: 0;right: 345px;bottom: 0;margin: auto;position: fixed;margin-bottom: 0px;border-radius: 50%;animation: 10s linear infinite move;animation-play-state: paused; }
 	@keyframes move{
 		from{ transform : rotate(0deg);}
 		to{ transform : rotate(360deg);}

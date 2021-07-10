@@ -135,11 +135,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-
-
-
-
-
 __webpack_require__(/*! ../../common/iconfont.css */ 24);
 
 var _api = __webpack_require__(/*! ../../common/api.js */ 25); //
@@ -161,21 +156,22 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 25); //
 //
 //
 //
-//
-//
-//
-//
-//
 // 引入css绝对路径
-// // 引入API
-// import { songDetail , songUrl } from '../../common/api.js'
+// 引入API
 var _default = { data: function data() {return { songDetail: { al: { picUrl: '' }, ar: { name: '' } } // playicon : 'icon-suspend_icon',// 播放状态
       // isplayrotate : true,// 暂停状态
     };}, // 自定义组件属性
-  props: ['title', 'singer', 'src'], methods: { // 监听点击播放
-    handleToPlay: function handleToPlay() {console.log("被点击"); // 如果是播放状态就开始播放
-      if (this.bgAudioMannager.paused) {this.bgAudioMannager.play();} else {// 否则暂停播放
-        this.bgAudioMannager.pause();}} } };exports.default = _default;
+  props: ['title', 'singer', 'src'], methods: {// // 监听点击播放
+    // handleToPlay(){
+    // 	console.log("被点击");
+    // 	// 如果是播放状态就开始播放
+    // 	if(this.bgAudioMannager.paused){
+    // 		this.bgAudioMannager.play();
+    // 	}else{ // 否则暂停播放
+    // 		this.bgAudioMannager.pause();
+    // 	}
+    // },
+  } };exports.default = _default;
 
 /***/ }),
 

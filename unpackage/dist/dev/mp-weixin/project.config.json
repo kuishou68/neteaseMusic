@@ -52,12 +52,6 @@
           "query": "",
           "id": 3,
           "pathName": "pages/search/search"
-        },
-        {
-          "name": "login",
-          "query": "",
-          "id": 4,
-          "pathName": "pages/login/login"
         }
       ]
     }
