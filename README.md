@@ -20,6 +20,16 @@
 
 ### 2、**项目搭建流程**：
 
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/47584bfb618b4a24b5c1bc671fc4d346~tplv-k3u1fbpfcp-watermark.image)
+
+
+![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5d3237dc1d0747b09429e93360a25092~tplv-k3u1fbpfcp-watermark.image)
+
+
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06e4033a8ba64165b49cb1b1c3a81485~tplv-k3u1fbpfcp-watermark.image)
+
+
+
 📣可以拿真实的网易云微信小程序做个对比
 
 ![img](https://pic1.zhimg.com/v2-cb86f210eae6ad2346fed503b751dd14_b.jpg)
