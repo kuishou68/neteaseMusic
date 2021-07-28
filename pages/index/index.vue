@@ -158,5 +158,6 @@
 	.index-list-img{ width:212rpx; height:212rpx; margin-right:20rpx; border-radius: 15rpx; overflow: hidden; position: relative;}
 	.index-list-img image{ width:100%; height:100%;}
 	.index-list-img text{ position: absolute; font-size:22rpx; color:white; bottom: 15rpx; left:15rpx;}
-	.index-list-text{ flex:1; font-size:24rpx; line-height: 68rpx;}
+	.index-list-text{ flex:1; font-size:24rpx; line-height: 68rpx; }
+	.index-list-text view{ width:60vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 </style>

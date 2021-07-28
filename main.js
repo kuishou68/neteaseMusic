@@ -1,5 +1,4 @@
 import Vue from 'vue'
-// import Vuex from "vuex"
 import App from './App'
 import store from './store/index.js'
 // 引入底部导航组件
@@ -37,6 +36,7 @@ Vue.filter('formatTime',function(value){
 
 App.mpType = 'app'
 
+// 挂载store
 const app = new Vue({
     ...App,
 	store

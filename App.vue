@@ -23,7 +23,6 @@
 		onHide: function() {
 			
 		},
-
 	}
 </script>
 

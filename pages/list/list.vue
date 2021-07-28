@@ -51,7 +51,7 @@
 			</scroll-view>
 		</view>
 		<!--底部全局状态播放栏-->
-<!-- 		<Footer :src="songDetail.al.picUrl"  :title="songDetail.name" :singer="songDetail.ar[0].name" ></Footer> -->
+		<Footer :src="songDetail.al.picUrl"  :title="songDetail.name" :singer="songDetail.ar[0].name" ></Footer>
 	</view>
 </template>
 
@@ -116,49 +116,6 @@
 				uni.navigateTo({
 					url: '/pages/detail/detail?songId=' + id
 				});
-				// Promise.all([songDetail(id), songUrl(id)]).then((res)=>{
-				// 	console.log("11111111");
-				// 	if(res[0][1].data.code == '200'){
-				// 		console.log("22222222");
-				// 		this.songDetail = res[0][1].data.songs[0];
-				// 	}
-				// 	// 获取音频地址
-				// 	if(res[1][1].data.code == '200'){
-				// 		console.log("333333333");
-				// 		// 创建背景音频播放管理 实例
-				// 		// #ifdef MP-WEIXIN
-				// 		this.bgAudioMannager = uni.getBackgroundAudioManager();
-				// 		this.bgAudioMannager.title = this.songDetail.name;
-				// 		// #endif
-				// 		// #ifdef H5
-				// 		if(!this.bgAudioMannager){
-				// 			// 创建并返回内部 audio 上下文 innerAudioContext 对象
-				// 			this.bgAudioMannager = uni.createInnerAudioContext();
-				// 		}
-				// 		this.playicon = 'icon-bofang';
-				// 		this.isplayrotate = false;
-				// 		// #endif
-				// 		this.bgAudioMannager.src = res[4][1].data.data[0].url;
-				// 		this.listenLyricIndex();
-				// 		// 监听播放状态事件
-				// 		this.bgAudioMannager.onPlay(()=>{
-				// 			this.playicon = 'icon-suspend_icon';
-				// 			this.isplayrotate = true;
-				// 			this.listenLyricIndex();
-				// 		});
-				// 		// 监听暂停状态事件
-				// 		this.bgAudioMannager.onPause(()=>{
-				// 			this.playicon = 'icon-bofang';
-				// 			this.isplayrotate = false;
-				// 			this.cancelLyricIndex();
-				// 		});
-				// 		// 监听上一首歌播放完毕，自动播放下一首歌
-				// 		this.bgAudioMannager.onEnded(()=>{
-				// 			this.playMusic(this.$store.state.nextId);
-				// 		});
-				// 	}
-					
-				// })
 			},
 			
 		}

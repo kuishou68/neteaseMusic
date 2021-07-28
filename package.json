@@ -6,5 +6,8 @@
     "keywords": [
         "uniapp",
         "小程序"
-    ]
+    ],
+    "dependencies": {
+        "vuex": "^3.6.2"
+    }
 }

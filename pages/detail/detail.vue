@@ -163,6 +163,9 @@
 					}
 					// 获取音频地址
 					if(res[4][1].data.code == '200'){
+						console.log(res)
+						// 把歌曲信息 commit 到 stor.js 中
+						// this.@store.commit('setPlayList', res)
 						// 创建背景音频播放管理 实例
 						// #ifdef MP-WEIXIN
 						this.bgAudioMannager = uni.getBackgroundAudioManager();
