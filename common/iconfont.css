@@ -1,11 +1,11 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2620813 */
-  src: url('~@/static/iconfont/iconfont.eot?t=1625383373850'); /* IE9 */
-  src: url('~@/static/iconfont/iconfont.eot?t=1625383373850#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('~@/static/iconfont/iconfont.woff2?t=1625383373850') format('woff2'),
-       url('~@/static/iconfont/iconfont.woff?t=1625383373850') format('woff'),
-       url('~@/static/iconfont/iconfont.ttf?t=1625383373850') format('truetype'),
-       url('~@/static/iconfont/iconfont.svg?t=1625383373850#iconfont') format('svg');
+  src: url('~static/iconfont/iconfont.eot?t=1628573619152'); /* IE9 */
+  src: url('~static/iconfont/iconfont.eot?t=1628573619152#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('~static/iconfont/iconfont.woff2?t=1628573619152') format('woff2'),
+       url('~static/iconfont/iconfont.woff?t=1628573619152') format('woff'),
+       url('~static/iconfont/iconfont.ttf?t=1628573619152') format('truetype'),
+       url('~static/iconfont/iconfont.svg?t=1628573619152#iconfont') format('svg');
 }
 
 .iconfont {
@@ -26,6 +26,10 @@
 
 .icon-yonghu1:before {
   content: "\e700";
+}
+
+.icon-yonghu-copy:before {
+  content: "\ebf8";
 }
 
 .icon-xiayishou:before {
