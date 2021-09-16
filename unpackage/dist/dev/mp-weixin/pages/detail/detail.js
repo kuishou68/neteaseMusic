@@ -158,17 +158,14 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 13);function ownKeys(o
 
   // 自定义组件属性
   props: ['title', 'singer', 'src'],
-  methods: {
-    // // 监听点击播放
-    // handleToPlay(){
-    // 	// 如果是播放状态就开始播放
-    // 	if(this.bgAudioMannager.paused){
-    // 		this.bgAudioMannager.play();
-    // 	}else{ // 否则暂停播放
-    // 		this.bgAudioMannager.pause();
-    // 	}
-    // },
+  onLoad: function onLoad(options) {
+    // 等待加载
+    uni.showToast({
+      title: '正在加载...' });
 
+    this.playMusic(options.songId);
+  },
+  methods: {
     // 播放/暂停 按钮
     playPause: function playPause() {var _this = this;
       console.log('播放/暂停');
@@ -193,21 +190,17 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 13);function ownKeys(o
         _this.playicon = 'icon-bofang';
         _this.isplayrotate = false;
       });
-    },
-    // 下一首
-    playNext: function playNext() {var _this2 = this;
-      console.log('切换下一首...');
-
-      this.bgAudioMannager = uni.getBackgroundAudioManager();
-      this.bgAudioMannager.title = this.songDetail.name;
-
-      // 切换下一首歌
-      this.bgAudioMannager.onNext(function () {
-        console.log('1111111');
-        // this.$store.commit('NEXT_ID',songId);
-        _this2.playMusic(_this2.$store.state.nextId + 1);
-      });
-    } } };exports.default = _default;
+      // onEnded 播放事件结束,
+      // this.bgAudioMannager.onended(() =>{
+      // 	this.getData(this.vuex_nextId)
+      // })
+    }
+    // // 下一首 按钮
+    // playNext(){
+    // 	console.log('切换下一首...');
+    // 	this.playMusic(this.vuex_nextId)
+    // }
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

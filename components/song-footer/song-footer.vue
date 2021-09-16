@@ -16,7 +16,7 @@
 			<!--播放按钮-->
 			<text class="player-controls-button1 iconfont icon-bofang" :class="playicon" @click="playPause()"></text>
 			<!--下一首-->
-			<text class="player-controls-button2 iconfont icon-kuaijin" @click="playNext()"></text>
+			<text class="player-controls-button2 iconfont icon-kuaijin" @click="playNext"></text>
 			<!--列表播放-->
 			<text class="player-controls-button3 iconfont icon-list" ></text>
 		</view>
@@ -47,17 +47,14 @@
 		},
 		// 自定义组件属性
 		props : ['title','singer','src'],
+		onLoad(options){
+			// 等待加载
+			uni.showToast({
+				title:'正在加载...'
+			})
+			this.playMusic(options.songId);
+		},
 		methods : {
-			// // 监听点击播放
-			// handleToPlay(){
-			// 	// 如果是播放状态就开始播放
-			// 	if(this.bgAudioMannager.paused){
-			// 		this.bgAudioMannager.play();
-			// 	}else{ // 否则暂停播放
-			// 		this.bgAudioMannager.pause();
-			// 	}
-			// },
-
 			// 播放/暂停 按钮
 			playPause(){
 				console.log('播放/暂停');
@@ -82,21 +79,16 @@
 					this.playicon = 'icon-bofang';
 					this.isplayrotate = false;
 				});
+				// onEnded 播放事件结束,
+				// this.bgAudioMannager.onended(() =>{
+				// 	this.getData(this.vuex_nextId)
+				// })
 			},
-			// 下一首
-			playNext(){
-				console.log('切换下一首...');
-				// #ifdef MP-WEIXIN
-				this.bgAudioMannager = uni.getBackgroundAudioManager();
-				this.bgAudioMannager.title = this.songDetail.name;
-				// #endif
-				// 切换下一首歌
-				this.bgAudioMannager.onNext(()=>{
-					console.log('1111111');
-					// this.$store.commit('NEXT_ID',songId);
-					this.playMusic(this.$store.state.nextId+1);
-				});
-			}
+			// // 下一首 按钮
+			// playNext(){
+			// 	console.log('切换下一首...');
+			// 	this.playMusic(this.vuex_nextId)
+			// }
 		},
 		
 	}

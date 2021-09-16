@@ -11,8 +11,9 @@
 					<text class="idnex-login-text">{{ userInfo.nickName ||  '未登录' }}</text>
 					<!--#ifdef MP-WEIXIN-->	
 						<button type="sumbit" plain="true" size="mini" open-type="getUserInfo" @tap="login" @click="change" >{{ logState }}</button>
-						<!-- <button type="sumbit" plain="true" size="mini" open-type="getUserInfo"  v-text="logState" v-show="flag==false">{{ logState }}</button> -->
-					<!--#endif-->
+					<!--#ifdef H5-->
+						<!-- <button type="sumbit" plain="true" size="mini" open-type="getUserInfo"  >{{ logState }}</button> -->
+					<!--#endif -->
 				</view>
 				<!--搜索栏-->
 				<view class="index-search" @tap="handleToSearch">

@@ -25,7 +25,7 @@
 				<button v-show="isShow" class="list-share" open-type="share">
 					<text class="iconfont icon-fenxiang"></text>分享给微信好友
 				</button>
-				<!-- #endif -->
+				<!--#endif -->
 				<view class="list-music">
 					<view v-show="isShow" class="list-music-title">
 						<!-- 🔔播放全部还未实现循环播放歌单🔔 -->
@@ -51,7 +51,7 @@
 			</scroll-view>
 		</view>
 		<!--底部全局状态播放栏-->
-		<Footer :src="songDetail.al.picUrl"  :title="songDetail.name" :singer="songDetail.ar[0].name" ></Footer>
+		<!-- <Footer  ></Footer> -->
 	</view>
 </template>
 
@@ -63,7 +63,7 @@
 	// 引入 歌曲列表接口
 	import { list , songDetail , songUrl } from '../../common/api.js'
 	// 引入底部组件
-	import Footer from '../../components/song-footer/song-footer.vue'
+	//import Footer from '../../components/song-footer/song-footer.vue'
 	export default {
 		data() {
 			return {
