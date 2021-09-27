@@ -57,10 +57,18 @@
 		methods : {
 			// 播放/暂停 按钮
 			playPause(){
-				console.log('播放/暂停');
 				// #ifdef MP-WEIXIN
 				this.bgAudioMannager = uni.getBackgroundAudioManager();
 				this.bgAudioMannager.title = this.songDetail.name;
+				// #endif
+				// #ifdef H5
+				if(!this.bgAudioMannager){
+					// 创建并返回内部 audio 上下文 innerAudioContext 对象
+					this.bgAudioMannager = uni.createInnerAudioContext();
+					console.log('播放/暂停');
+				}
+				this.playicon = 'icon-bofang';
+				this.isplayrotate = false;
 				// #endif
 				// 如果是播放状态就开始播放
 				if(this.bgAudioMannager.paused){
@@ -68,7 +76,7 @@
 				}else{ // 否则暂停播放
 					this.bgAudioMannager.pause();
 				}
-				this.playicon = 'icon-bofang';
+				// this.playicon = 'icon-bofang';
 				// 监听播放状态事件
 				this.bgAudioMannager.onPlay(()=>{
 					this.playicon = 'icon-suspend_icon';
@@ -78,6 +86,10 @@
 				this.bgAudioMannager.onPause(()=>{
 					this.playicon = 'icon-bofang';
 					this.isplayrotate = false;
+				});
+				// 监听上一首歌播放完毕，自动播放下一首歌
+				this.bgAudioMannager.onEnded(()=>{
+					this.playMusic(this.$store.state.nextId);
 				});
 				// onEnded 播放事件结束,
 				// this.bgAudioMannager.onended(() =>{
