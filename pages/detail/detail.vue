@@ -20,6 +20,7 @@
 				</view>
 				<!--歌词-->
 				<view class="detail-lyric">
+					<!--transform传递向Y轴滚动的位置，值为一个行高82rpx-->
 					<view class="detail-lyric-wrap" :style="{ transform : 'translateY(' +  - (lyricIndex - 1) * 82  + 'rpx)' }">
 						<view 
 							class="detail-lyric-item" 
@@ -98,9 +99,9 @@
 				},
 				songSimi : [],
 				songComment : [],
-				songLyric : [],
-				lyricIndex : 0,
-				playicon : 'icon-suspend_icon',// 播放状态
+				songLyric : [],	// 歌词转换成秒的时间点数组
+				lyricIndex : 0,	// 歌词选中状态
+				playicon : 'icon-suspend_icon',// 播放状态，默认开启播放
 				isplayrotate : true,// 暂停状态
 				isLoading : true, // 加载状态
 			}
@@ -124,12 +125,12 @@
 		onHide(){
 			this.cancelLyricIndex();
 			// #ifdef H5
-			this.bgAudioMannager.destroy();
+			this.bgAudioMannager.destroy(); 
 			// #endif
 		},
 		methods: {
 			playMusic(songId){
-				// 通过保留歌曲id方式+1，自动播放下一首歌曲
+				// 通过保留歌曲id方式+1，得到下一首歌曲ID
 				this.$store.commit('NEXT_ID',songId);
 				// 等待加载
 				uni.showToast({
@@ -155,7 +156,9 @@
 						let result = [];
 						// 正则表达式分隔歌词
 						let re = /\[([^\]]+)\]([^[]+)/g;
+						// $0是正则第一个小括号中的结果，$1是正则第二个小括号的结果，$2是歌词
 						lyric.replace(re,($0,$1,$2)=>{
+							// 存放到数组中
 							result.push({ time : this.formatTimeToSec($1) , lyric : $2 });
 						});
 						// 进行映射
@@ -163,7 +166,7 @@
 					}
 					// 获取音频地址
 					if(res[4][1].data.code == '200'){
-						console.log(res)
+						// console.log(res)
 						// 把歌曲信息 commit 到 stor.js 中
 						// this.@store.commit('setPlayList', res)
 						// 创建背景音频播放管理 实例
@@ -193,17 +196,19 @@
 							this.isplayrotate = false;
 							this.cancelLyricIndex();
 						});
-						// 监听上一首歌播放完毕，自动播放下一首歌
+						// 监听上一首歌播放完毕之后，调用playMusic(从Vuex中取出来的ID)
 						this.bgAudioMannager.onEnded(()=>{
 							this.playMusic(this.$store.state.nextId);
+							console.log('即将自动播放下一首');
 						});
 					}
 					// 整个加载完成之后
 					this.isLoading = false;
+					// 隐藏 loading 提示框
 					uni.hideLoading();
 				});
 			},
-			// 转化成秒
+			// 转化成秒的方法
 			formatTimeToSec(time){
 				// 分钟和秒分隔开后存放到数组中
 				var arr = time.split(':');

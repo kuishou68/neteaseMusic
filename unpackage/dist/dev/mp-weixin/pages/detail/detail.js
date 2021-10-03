@@ -131,11 +131,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
 __webpack_require__(/*! ../../common/iconfont.css */ 26);
 
 var _vuex = __webpack_require__(/*! vuex */ 12);
@@ -158,49 +153,90 @@ var _api = __webpack_require__(/*! ../../common/api.js */ 13);function ownKeys(o
 
   // 自定义组件属性
   props: ['title', 'singer', 'src'],
+  // 接收传递过来的歌曲id
   onLoad: function onLoad(options) {
     // 等待加载
     uni.showToast({
       title: '正在加载...' });
 
-    this.playMusic(options.songId);
+    this.playPause(options.songId);
   },
   methods: {
     // 播放/暂停 按钮
-    playPause: function playPause() {var _this = this;
-      console.log('播放/暂停');
+    playPause: function playPause(songId) {var _this = this;
+      // 通过保留歌曲id方式+1，得到下一首歌曲ID
+      this.$store.commit('NEXT_ID', songId);
+      // 等待加载
+      uni.showToast({
+        title: '正在加载...' });
 
-      this.bgAudioMannager = uni.getBackgroundAudioManager();
-      this.bgAudioMannager.title = this.songDetail.name;
+      this.isLoading = true;
+      // 判断每个接口的状态是否正常
+      Promise.all([(0, _api.songDetail)(songId), (0, _api.songSimi)(songId), (0, _api.songComment)(songId), (0, _api.songLyric)(songId), (0, _api.songUrl)(songId)]).then(function (res) {
+        if (res[0][1].data.code == '200') {
+          _this.songDetail = res[0][1].data.songs[0];
+        }
+        if (res[1][1].data.code == '200') {
+          _this.songSimi = res[1][1].data.songs;
+        }
+        if (res[2][1].data.code == '200') {
+          _this.songComment = res[2][1].data.hotComments;
+        }
+        // 获取音频地址
+        if (res[4][1].data.code == '200') {
+          // 创建背景音频播放管理 实例
 
+          _this.bgAudioMannager = uni.getBackgroundAudioManager();
+          _this.bgAudioMannager.title = _this.songDetail.name;
+
+
+
+
+
+
+
+
+
+          _this.bgAudioMannager.src = res[4][1].data.data[0].url;
+          // 监听播放状态事件
+          _this.bgAudioMannager.onPlay(function () {
+            _this.playicon = 'icon-suspend_icon';
+            _this.isplayrotate = true;
+          });
+          // 监听暂停状态事件
+          _this.bgAudioMannager.onPause(function () {
+            _this.playicon = 'icon-bofang';
+            _this.isplayrotate = false;
+          });
+          // 监听上一首歌播放完毕之后，调用playMusic(从Vuex中取出来的ID)
+          _this.bgAudioMannager.onEnded(function () {
+            _this.playMusic(_this.$store.state.nextId);
+            console.log('即将自动播放下一首');
+          });
+        }
+        // 整个加载完成之后
+        _this.isLoading = false;
+        // 隐藏 loading 提示框
+        uni.hideLoading();
+      });
+    },
+    // 监听点击播放
+    handleToPlay: function handleToPlay() {
       // 如果是播放状态就开始播放
       if (this.bgAudioMannager.paused) {
         this.bgAudioMannager.play();
       } else {// 否则暂停播放
         this.bgAudioMannager.pause();
       }
-      this.playicon = 'icon-bofang';
-      // 监听播放状态事件
-      this.bgAudioMannager.onPlay(function () {
-        _this.playicon = 'icon-suspend_icon';
-        _this.isplayrotate = true;
-      });
-      // 监听暂停状态事件
-      this.bgAudioMannager.onPause(function () {
-        _this.playicon = 'icon-bofang';
-        _this.isplayrotate = false;
-      });
-      // onEnded 播放事件结束,
-      // this.bgAudioMannager.onended(() =>{
-      // 	this.getData(this.vuex_nextId)
-      // })
-    }
-    // // 下一首 按钮
-    // playNext(){
-    // 	console.log('切换下一首...');
-    // 	this.playMusic(this.vuex_nextId)
-    // }
-  } };exports.default = _default;
+    },
+    // 手动点击 下一首 按钮
+    playNext: function playNext(songId) {
+      console.log('切换下一首...');
+      var nextId = this.$store.state.nextId;
+      console.log(nextId);
+      this.playPause(nextId);
+
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
@@ -496,6 +532,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _musichead = _interopRequireDefault(__webpack_require__(/*! ../../components/musichead/musichead.vue */ 45));
 
 __webpack_require__(/*! ../../common/iconfont.css */ 26);
@@ -584,40 +621,44 @@ var _songFooter = _interopRequireDefault(__webpack_require__(/*! ../../component
 //
 //
 //
+//
 // 引入返回上一级、返回首页 头部组件
 // 引入css绝对路径
 // 引入API
 // 引入底部组件
-var _default = { data: function data() {return { songDetail: { al: { picUrl: '' }, ar: { name: '' } }, songSimi: [], songComment: [], songLyric: [], lyricIndex: 0, playicon: 'icon-suspend_icon', // 播放状态
+var _default = { data: function data() {return { songDetail: { al: { picUrl: '' }, ar: { name: '' } }, songSimi: [], songComment: [], songLyric: [], // 歌词转换成秒的时间点数组
+      lyricIndex: 0, // 歌词选中状态
+      playicon: 'icon-suspend_icon', // 播放状态，默认开启播放
       isplayrotate: true, // 暂停状态
       isLoading: true // 加载状态
     };}, // 接收传递过来的歌曲id
   onLoad: function onLoad(options) {// 等待加载
     uni.showToast({ title: '正在加载...' });this.playMusic(options.songId);}, // 离开当前页面，回到上一级的时候，清除定时器
   onUnload: function onUnload() {this.cancelLyricIndex();}, // 回到首页的时候，清除定时器
-  onHide: function onHide() {this.cancelLyricIndex();}, methods: { playMusic: function playMusic(songId) {var _this = this; // 通过保留歌曲id方式+1，自动播放下一首歌曲
+  onHide: function onHide() {this.cancelLyricIndex();}, methods: { playMusic: function playMusic(songId) {var _this = this; // 通过保留歌曲id方式+1，得到下一首歌曲ID
       this.$store.commit('NEXT_ID', songId); // 等待加载
       uni.showToast({ title: '正在加载...' });this.isLoading = true; // 判断每个接口的状态是否正常
       Promise.all([(0, _api.songDetail)(songId), (0, _api.songSimi)(songId), (0, _api.songComment)(songId), (0, _api.songLyric)(songId), (0, _api.songUrl)(songId)]).then(function (res) {if (res[0][1].data.code == '200') {_this.songDetail = res[0][1].data.songs[0];}if (res[1][1].data.code == '200') {_this.songSimi = res[1][1].data.songs;}if (res[2][1].data.code == '200') {_this.songComment = res[2][1].data.hotComments;} // 歌词
         if (res[3][1].data.code == '200') {// 先拿到歌词
           var lyric = res[3][1].data.lrc.lyric; // 歌词停留的时间
           var result = []; // 正则表达式分隔歌词
-          var re = /\[([^\]]+)\]([^[]+)/g;lyric.replace(re, function ($0, $1, $2) {result.push({ time: _this.formatTimeToSec($1), lyric: $2 });}); // 进行映射
+          var re = /\[([^\]]+)\]([^[]+)/g; // $0是正则第一个小括号中的结果，$1是正则第二个小括号的结果，$2是歌词
+          lyric.replace(re, function ($0, $1, $2) {// 存放到数组中
+            result.push({ time: _this.formatTimeToSec($1), lyric: $2 });}); // 进行映射
           _this.songLyric = result;} // 获取音频地址
-        if (res[4][1].data.code == '200') {console.log(res); // 把歌曲信息 commit 到 stor.js 中
+        if (res[4][1].data.code == '200') {// console.log(res)
+          // 把歌曲信息 commit 到 stor.js 中
           // this.@store.commit('setPlayList', res)
           // 创建背景音频播放管理 实例
           _this.bgAudioMannager = uni.getBackgroundAudioManager();_this.bgAudioMannager.title = _this.songDetail.name;_this.bgAudioMannager.src = res[4][1].data.data[0].url;_this.listenLyricIndex(); // 监听播放状态事件
           _this.bgAudioMannager.onPlay(function () {_this.playicon = 'icon-suspend_icon';_this.isplayrotate = true;_this.listenLyricIndex();}); // 监听暂停状态事件
-          _this.bgAudioMannager.onPause(function () {_this.playicon = 'icon-bofang';_this.isplayrotate = false;_this.cancelLyricIndex();}); // 监听上一首歌播放完毕，自动播放下一首歌
-          _this.bgAudioMannager.onEnded(function () {_this.playMusic(_this.$store.state.nextId);});
-        }
-        // 整个加载完成之后
-        _this.isLoading = false;
+          _this.bgAudioMannager.onPause(function () {_this.playicon = 'icon-bofang';_this.isplayrotate = false;_this.cancelLyricIndex();}); // 监听上一首歌播放完毕之后，调用playMusic(从Vuex中取出来的ID)
+          _this.bgAudioMannager.onEnded(function () {_this.playMusic(_this.$store.state.nextId);console.log('即将自动播放下一首');});} // 整个加载完成之后
+        _this.isLoading = false; // 隐藏 loading 提示框
         uni.hideLoading();
       });
     },
-    // 转化成秒
+    // 转化成秒的方法
     formatTimeToSec: function formatTimeToSec(time) {
       // 分钟和秒分隔开后存放到数组中
       var arr = time.split(':');

@@ -95,7 +95,7 @@
 			// 修改后，修改 options 为 playlist ，之前的idx是在options，现在榜单的id在playlist下
 			let listId = playlist.id;
 			// console.log(listId); // 打印传递过来的id
-			// 放回歌曲列表
+			// 返回歌曲列表
 			list(listId).then((res)=>{
 				// 打印接口信息
 				// console.log(res);
@@ -103,6 +103,7 @@
 				if(res[1].data.code == '200'){
 					this.playlist = res[1].data.playlist;
 					this.privileges = res[1].data.privileges;
+					// 向Vuex中INIT_CHANGE方法提交点击之后歌曲ID
 					this.$store.commit('INIT_CHANGE',this.playlist.trackIds);
 					this.isShow = true;
 				}

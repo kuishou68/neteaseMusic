@@ -161,6 +161,10 @@
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
 }
+.container .detail-play-run.data-v-3ed8ddac {
+  -webkit-animation-play-state: running;
+          animation-play-state: running;
+}
 @-webkit-keyframes move-data-v-3ed8ddac {
 from {
     -webkit-transform: rotate(0deg);
@@ -218,6 +222,11 @@ to {
   margin-right: 10px;
   color: #dd001b;
 }
+
+
+
+
+
 
 
 
