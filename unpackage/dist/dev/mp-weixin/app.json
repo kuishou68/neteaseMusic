@@ -17,5 +17,6 @@
   ],
   "usingComponents": {
     "footer": "/components/song-footer/song-footer"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
