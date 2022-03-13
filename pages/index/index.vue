@@ -12,7 +12,7 @@
 					<!--#ifdef MP-WEIXIN-->	
 						<button type="sumbit" plain="true" size="mini" open-type="getUserInfo" @tap="login" @click="change" >{{ logState }}</button>
 					<!--#ifdef H5-->
-						<!-- <button type="sumbit" plain="true" size="mini" open-type="getUserInfo"  >{{ logState }}</button> -->
+						<button type="sumbit" plain="true" size="mini" open-type="getUserInfo" @tap="login" @click="change" >{{ logState }}</button>
 					<!--#endif -->
 				</view>
 				<!--搜索栏-->
@@ -135,7 +135,7 @@
 			change(){
 				// 这里只是改变了按钮文字内容，真正退出需要清除token，回到首页,还没找到头绪怎么做
 				this.logState = '已登录';
-				
+				console.log('登录')
 			}
 		}
 	}

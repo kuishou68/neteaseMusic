@@ -2,7 +2,7 @@
 	<view class="detail">
 		<view class="fixbg" :style="{backgroundImage:'url('+ songDetail.al.picUrl +')'}"></view>
 		<musichead  :title="songDetail.name" :icon="true" color="white"></musichead>
-		<view class="container" v-show="!isLoading">
+		<view class="ios-safe-area" v-show="!isLoading">
 			<scroll-view scroll-y="true">
 				<!--播放转盘-->
 				<view class="detail-play" @tap="handleToPlay">
@@ -77,7 +77,24 @@
 			</scroll-view>
 		</view>
 		<!--底部全局状态播放栏-->
-		<Footer :src="songDetail.al.picUrl"  :title="songDetail.name" :singer="songDetail.ar[0].name" ></Footer>
+		<!-- <Footer :src="songDetail.al.picUrl"  :title="songDetail.name" :singer="songDetail.ar[0].name" ></Footer> -->
+		<view class="container ios-safe-area">
+			<!--底部播放栏-->
+			<image :src="songDetail.al.picUrl" :class="{ 'detail-play-run' : isplayrotate }" mode=""></image>
+			<view class="player-info">
+				<text class="player-info-title" >{{ songDetail.name }}</text><br/>
+				<text class="player-info-singer" >{{ songDetail.ar[0].name }}</text>
+			</view>
+			<!--右边按钮-->
+			<view class="player-controls" >
+				<!--播放按钮-->
+				<text class="player-controls-button1 iconfont icon-bofang" :class="playicon" @click="handleToPlay"></text>
+				<!--下一首-->
+				<text class="player-controls-button2 iconfont icon-kuaijin" @click="playNext()"></text>
+				<!--列表播放-->
+				<text class="player-controls-button3 iconfont icon-list" ></text>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -89,7 +106,7 @@
 	// 引入API
 	import { songDetail , songUrl , songLyric , songSimi , songComment  } from '../../common/api.js';
 	// 引入底部组件
-	import Footer from '../../components/song-footer/song-footer.vue'
+	// import Footer from '../../components/song-footer/song-footer.vue'
 	export default {
 		data() {
 			return {
@@ -250,6 +267,12 @@
 			// 跳转切换歌曲，拿到handleToSimi.id 更新整个数据
 			handleToSimi(songId){
 				this.playMusic(songId);
+			},
+			// 手动点击 下一首 按钮
+			playNext(){
+				console.log('切换下一首...');
+				var nextId = this.$store.state.nextId
+				this.playMusic(nextId);
 			}
 		}
 	}
@@ -270,7 +293,7 @@
 	.detail-play .detail-play-run{ animation-play-state: running;}
 	.detail-play image{ width:380rpx; height:380rpx;  position: absolute; left:0; top:0; right:0; bottom:0; margin:auto; animation:10s linear infinite move; animation-play-state: paused;}
 	.detail-play view:nth-child(3) text{ width:100rpx; height:100rpx; font-size:100rpx; position: absolute; left:0; top:0; right:0; bottom:0; margin:auto; color:white;}
-	 @keyframes move{
+	@keyframes move{
 		from{ transform : rotate(0deg);}
 		to{ transform : rotate(360deg);}
 	}
@@ -303,5 +326,27 @@
 	.detail-comment-name view:nth-child(2){ font-size:20rpx;}
 	.detail-comment-like{ font-size:30rpx;}
 	.detail-comment-text{ line-height: 40rpx; color:white; font-size:28rpx; margin-top:16rpx; border-bottom:1px #595860 solid; padding-bottom: 40rpx;}
-	
+		
+	.container { position: fixed; bottom: 0; left: 0; width: 100%; height: 98rpx; background: #FFFFFF; box-shadow: 0 2rpx 40rpx 0 rgba(0, 0, 0, 0.18); display: flex; justify-content: space-around; align-items: center; z-index: 9999;}
+	.container image{ width: 58px;height: 58px;left: 0;top: 0;right: 345px;bottom: 0;margin: auto;position: fixed;margin-bottom: 0px;border-radius: 50%;animation: 10s linear infinite move;animation-play-state: paused; }
+	.container .detail-play-run{ animation-play-state: running;}
+	@keyframes move{
+		from{ transform : rotate(0deg);}
+		to{ transform : rotate(360deg);}
+	}
+	/*歌曲信息*/
+	.container .player-info{flex: 1; font-size: 10pt; line-height: 38rpx; margin-left: 127rpx; padding-bottom: 8rpx;
+		/*歌名超出部分隐藏并用省略号显示*/
+		overflow: hidden;//超出部分隐藏
+		text-overflow: ellipsis;//溢出用省略号显示
+		white-space: nowrap;//溢出不换行
+	}
+	/*歌手名*/
+	.container .player-info .player-info-singer{ color: #888; }
+	/*播放按钮*/
+	.container .player-controls .player-controls-button1{ font-size:35px; color: #dd001b;}
+		/*下一首*/
+	.container .player-controls .player-controls-button2{ font-size:34px; margin-left:15px; color: #dd001b; }
+		/*列表播放*/
+	.container .player-controls .player-controls-button3{ font-size:35px; margin-left:15px; margin-right: 10px; color: #dd001b;}
 </style>
