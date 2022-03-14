@@ -1,5 +1,13 @@
 import { baseUrl } from './config.js';
-// 请求接口
+
+// 登录接口（可登录自己真实的网易云音乐账号）
+export function login(){
+	return uni.request({
+		url:`${baseUrl}/login/cellphone`,
+		method: 'POST'
+	})
+}
+// 请求歌单详情接口
 export function topList(){
 	// 修改前，以前的接口依赖idx 
 	// var listIds = ['3' , '0' , '2' , '1' ];

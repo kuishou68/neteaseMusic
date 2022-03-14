@@ -11,8 +11,9 @@
 					<text class="idnex-login-text">{{ userInfo.nickName ||  '未登录' }}</text>
 					<!--#ifdef MP-WEIXIN-->	
 						<button type="sumbit" plain="true" size="mini" open-type="getUserInfo" @tap="login" @click="change" >{{ logState }}</button>
+					<!--#endif -->
 					<!--#ifdef H5-->
-						<button type="sumbit" plain="true" size="mini" open-type="getUserInfo" @tap="login" @click="change" >{{ logState }}</button>
+						<button type="sumbit" plain="true" size="mini" open-type="getUserInfo" @tap="handleToLogin" @click="change" >{{ logState }}</button>
 					<!--#endif -->
 				</view>
 				<!--搜索栏-->
@@ -68,7 +69,7 @@
 				topList : [],
 				loading: true,
 				userInfo : {},
-				logState : '立即登录',
+				logState : '立即登录'
 			};
 		},
 		// 局部组件
@@ -94,6 +95,13 @@
 			handleToList(listId){
 				uni.navigateTo({
 					url: '/pages/list/list?id=' + listId
+				});
+			},
+			// 跳转到登录页面
+			handleToLogin(){
+				console.log('登录页面')
+				uni.switchTab({
+					url: '/pages/login/index'
 				});
 			},
 			// 搜索歌曲
