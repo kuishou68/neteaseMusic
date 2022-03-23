@@ -1,10 +1,11 @@
 import { baseUrl } from './config.js';
 
 // 登录接口（可登录自己真实的网易云音乐账号）
-export function login(){
+export function login(params){
 	return uni.request({
 		url:`${baseUrl}/login/cellphone`,
-		method: 'POST'
+		method: 'POST',
+		data: params
 	})
 }
 // 请求歌单详情接口

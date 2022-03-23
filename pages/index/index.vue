@@ -100,8 +100,8 @@
 			// 跳转到登录页面
 			handleToLogin(){
 				console.log('登录页面')
-				uni.switchTab({
-					url: '/pages/login/index'
+				uni.navigateTo({
+					url: '/pages/login/login'
 				});
 			},
 			// 搜索歌曲
