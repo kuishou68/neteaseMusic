@@ -8,6 +8,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	// 初始数据
     state : {
+		login: false,  
+		token: '',  
+		avatarUrl: '',  
+		userName: '' ,
         topIdList : [],// 歌曲列表空数组
 		nextId : '',// 下一首歌曲iID
 		// 全局播放信息
@@ -19,6 +23,21 @@ export default new Vuex.Store({
 		isplayrotate : true,// 暂停状态
     },
     mutations : {
+		login(state, provider) {  
+		    console.log(state)  
+			// 接收到的登录信息
+			console.log(provider)  
+		    state.login = true;  
+		    state.token = provider.token;  
+		    state.nickName = provider.profile.nickname;  
+		    state.avatarUrl = provider.profile.avatarUrl;  
+		},  
+		logout(state) {  
+		    state.login = false;  
+		    state.token = '';  
+		    state.nickName = '';  
+		    state.avatarUrl = '';  
+		},
 		// 修改播放列表
 		setPlayList(state, value){
 			console.log('获取到播放列表')

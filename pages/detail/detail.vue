@@ -272,6 +272,7 @@
 			playNext(){
 				console.log('切换下一首...');
 				var nextId = this.$store.state.nextId
+				console.log(this.$store)
 				this.playMusic(nextId);
 			}
 		}

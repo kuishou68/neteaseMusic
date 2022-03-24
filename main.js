@@ -6,7 +6,8 @@ import Footer  from 'components/song-footer/song-footer.vue'
 // 全局注册底部导航
 Vue.component('Footer', Footer)
 
-// Vue.config.productionTip = false
+Vue.prototype.$store = store
+
 // 创建一个过滤器
 Vue.filter('formatCount',function(value){
 	// 判断在万~亿之间的访问量

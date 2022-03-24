@@ -10,10 +10,10 @@
 					</view>
 					<text class="idnex-login-text">{{ userInfo.nickName ||  '未登录' }}</text>
 					<!--#ifdef MP-WEIXIN-->	
-						<button type="sumbit" plain="true" size="mini" open-type="getUserInfo" @tap="login" @click="change" >{{ logState }}</button>
+						<button type="sumbit" plain="true" size="mini" open-type="getUserInfo" @tap="login" @click="change" >{{ loginState ? '退出登录' : '立即登录' }}</button>
 					<!--#endif -->
 					<!--#ifdef H5-->
-						<button type="sumbit" plain="true" size="mini" open-type="getUserInfo" @tap="handleToLogin" @click="change" >{{ logState }}</button>
+						<button type="sumbit" plain="true" size="mini" open-type="getUserInfo" @tap="handleToLogin" @click="change" >{{ loginState ? '退出登录' : '立即登录'}}</button>
 					<!--#endif -->
 				</view>
 				<!--搜索栏-->
@@ -62,14 +62,14 @@
 	import { topList } from '../../common/api.js'
 	// 导入循环骨架屏
 	import mForSkeleton from "@/components/m-for-skeleton/m-for-skeleton"
-
+	
 	export default {
 		data() {
 			return {
 				topList : [],
 				loading: true,
 				userInfo : {},
-				logState : '立即登录'
+				loginState : false
 			};
 		},
 		// 局部组件
@@ -88,7 +88,9 @@
 					},2000);
 				}
 			});
-			
+		},
+		onShow(){
+			this.toGetLogin();
 		},
 		methods: {
 			// 调转到list.vue播放页面
@@ -99,10 +101,15 @@
 			},
 			// 跳转到登录页面
 			handleToLogin(){
-				console.log('登录页面')
-				uni.navigateTo({
-					url: '/pages/login/login'
-				});
+				if(this.loginState){
+					// 点击退出后
+					this.userInfo = {}; // 清空用户信息
+					this.loginState = false;
+				}else{
+					uni.navigateTo({
+						url: '/pages/login/login'
+					});
+				}
 			},
 			// 搜索歌曲
 			handleToSearch(){
@@ -110,7 +117,15 @@
 					url: '/pages/search/search'
 				});
 			},
-			// 登录部分
+			// 获取H5登录后的用户信息
+			toGetLogin(){
+				console.log(this.$store.state)
+				this.loginState = this.$store.state.login; // 登录状态
+				this.userInfo.nickName = this.$store.state.nickName; // 用户名
+				this.userInfo.avatarUrl = this.$store.state.avatarUrl; // 头像
+				console.log(this.userInfo)
+			},
+			// 微信登录部分
 			login(){
 				// 获取code 小程序专有，用户登录凭证。
 				uni.getUserProfile({
@@ -142,8 +157,7 @@
 			// 退出登录
 			change(){
 				// 这里只是改变了按钮文字内容，真正退出需要清除token，回到首页,还没找到头绪怎么做
-				this.logState = '已登录';
-				console.log('登录')
+				this.loginState = false;
 			}
 		}
 	}
