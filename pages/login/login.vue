@@ -1,6 +1,6 @@
 <template>
 	<view class="container bg-main pos-r">
-		<musichead title="登录" :icon="true" :iconBlack="true"></musichead>
+		<musichead title="忘记密码" :icon="true" :iconBlack="true"></musichead>
 		<view class="padding-xl dflex-c dflex-flow-c">
 			<view class="headimg-box margin-top margin-bottom-xl">
 				<image class="headimg border-radius-c" src="/static/user/default.png"></image>
@@ -15,10 +15,17 @@
 						<view class="flex1 dflex">
 							<input class="border-line padding-sm flex1" type="number" data-key="mobile" maxlength="11"
 								:value="mobile" @input="inputChange" placeholder="请输入手机号" />
-							<view v-if="0 == 1" class="padding-tb-sm ft-dark" @click="send_code">获取</view>
 						</view>
 					</view>
-
+					<view class="w-full dflex padding-bottom-sm">
+						<view class="iconfont iconyanzheng margin-right"></view>
+						<view class="border-line flex1 dflex">
+							<input class="padding-sm flex1" type="number" data-key="code" maxlength="6" :value="code"
+								@input="inputChange" @confirm="register" placeholder="请输入验证码" />
+							<view v-if="!is_send" class="padding-tb-sm ft-base" @click="sendCode">发送验证码</view>
+							<view v-else class="padding-tb-sm ft-base">{{code_time}}s 重新获取</view>
+						</view>
+					</view>
 					<use-smscode type="login" :mobile="mobile" :agreement="agreement"
 						:agreementContent="agreementContent" @change="codeChange" @confirm="tologin"></use-smscode>
 				</swiper-item>

@@ -29,6 +29,18 @@
             "style" : {
 				"navigationStyle" : "custom"
 			}
+        },
+		{
+            "path" : "pages/login/register",
+            "style" : {
+				"navigationStyle" : "custom"
+			}
+        },
+		{
+            "path" : "pages/login/forgot-password",
+            "style" : {
+				"navigationStyle" : "custom"
+			}
         }
      
     ],
