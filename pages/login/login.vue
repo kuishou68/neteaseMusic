@@ -1,6 +1,6 @@
 <template>
 	<view class="container bg-main pos-r">
-		<musichead title="忘记密码" :icon="true" :iconBlack="true"></musichead>
+		<musichead title="登录" :icon="true" :iconBlack="true"></musichead>
 		<view class="padding-xl dflex-c dflex-flow-c">
 			<view class="headimg-box margin-top margin-bottom-xl">
 				<image class="headimg border-radius-c" src="/static/user/default.png"></image>
@@ -57,7 +57,7 @@
 
 							<view class="pos-r">
 								<view class="vertical-line" style="right: calc(100% + 20rpx);"></view>
-								<view class="padding-tb-sm ft-dark" @click="toforget">忘记密码</view>
+								<!-- <view class="padding-tb-sm ft-dark" @click="toforget">忘记密码</view> -->
 							</view>
 						</view>
 					</view>
@@ -71,7 +71,7 @@
 			</view>
 
 			<view class="dflex-b w-full margin-bottom-sm ft-dark-4">
-				<view v-if="loginWay == 'pwd'" class="padding-tb-sm" @click="loginWayChange('code')">验证码登录</view>
+				<view v-if="loginWay == 'pwd'" class="padding-tb-sm" @click="loginWayChange('code')"></view>
 				<view v-if="loginWay == 'code'" class="padding-tb-sm" @click="loginWayChange('pwd')">账号密码登录</view>
 				<view class="padding-tb-sm" @click="toregister">立即注册</view>
 			</view>
@@ -165,6 +165,7 @@
 				agreementContent: '已阅读并同意',
 				agreementDatas: [],
 				ismp: false,
+				is_send: false,
 				platform: '',
 				platform_name: '',
 				platform_icon: '',

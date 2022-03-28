@@ -1,6 +1,6 @@
 <template>
 	<view class="container bg-main pos-r">
-		<musichead title="注册" :icon="true" :iconBlack="true"></musichead>
+		<musichead title="忘记密码" :icon="true" :iconBlack="true"></musichead>
 		<view class="padding-xl dflex-c dflex-flow-c">
 			<view class="portrait-box margin-bottom">
 				<image class="headimg border-radius-c" :src="(member && member.member_headimg) || '/static/images/user/default.png'"></image>

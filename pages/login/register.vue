@@ -5,7 +5,15 @@
 			<view class="portrait-box margin-bottom">
 				<image class="headimg border-radius-c" :src="(member && member.member_headimg) || '/static/images/user/default.png'"></image>
 			</view>
-
+			<!-- 昵称 -->
+			<view class="w-full dflex padding-bottom-sm">
+				<view class="iconfont iconuser margin-right"></view>
+				<view class="flex1 dflex">
+					<input class="border-line padding-sm flex1" type="text" data-key="nickname" maxlength="15"
+						:value="nickname" @input="inputChange" placeholder="请输入昵称" />
+				</view>
+			</view>
+			<!-- 手机号 -->
 			<view class="w-full dflex padding-bottom-sm">
 				<view class="iconfont iconshouji margin-right"></view>
 				<view class="flex1 dflex">
@@ -14,7 +22,7 @@
 					<view v-if="0 == 1" class="padding-tb-sm ft-dark">获取</view>
 				</view>
 			</view>
-
+			<!-- 密码 -->
 			<view class="w-full dflex padding-bottom-sm">
 				<view class="iconfont iconmima margin-right"></view>
 				<!-- #ifdef MP -->
@@ -27,7 +35,7 @@
 				<!-- #endif -->
 
 			</view>
-
+			<!-- 验证码 -->
 			<view class="w-full dflex padding-bottom-sm">
 				<view class="iconfont iconyanzheng margin-right"></view>
 				<view class="border-line flex1 dflex">
@@ -50,7 +58,8 @@
 
 <script>
 	// 引入返回上一级、返回首页 头部组件
-	import musichead from '@/components/musichead/musichead.vue'
+	import musichead from '@/components/musichead/musichead.vue';
+	import { register, sendCode, sendCodeVerify } from '@/common/api.js';
 	import {
 		mapState
 	} from 'vuex';
@@ -60,7 +69,8 @@
 			return {
 				env: {},
 				is_show: false,
-
+				
+				nickname: '',
 				mobile: '',
 				password: '',
 				code: '',
@@ -86,14 +96,14 @@
 			// #endif
 		},
 		onLoad() {
-			this.$api.get_env((res) => {
-				this.env = res;
-				// console.log(this.env);
-				this.is_mp = this.env.is_mp;
-				this.platform = this.env.platform;
-				this.platform_icon = this.env.platform_icon;
-				this.platform_name = this.env.platform_name;
-			});
+			// this.$api.get_env((res) => {
+			// 	this.env = res;
+			// 	// console.log(this.env);
+			// 	this.is_mp = this.env.is_mp;
+			// 	this.platform = this.env.platform;
+			// 	this.platform_icon = this.env.platform_icon;
+			// 	this.platform_name = this.env.platform_name;
+			// });
 		},
 		methods: {
 			inputChange(e) {
@@ -102,55 +112,71 @@
 			},
 
 			// 发送验证码
-			// sendCode() {
-			// 	let _this = this;
+			sendCode() {
+				let _this = this;
 
-			// 	if (!this.mobile) {
-			// 		this.$api.msg('请输入手机号');
-			// 		return;
-			// 	}
-			// 	if (!/(^1[3|4|5|7|8|9][0-9]{9}$)/.test(this.mobile)) {
-			// 		this.$api.msg('请输入正确的手机号码');
-			// 		return;
-			// 	}
+				if (!this.mobile) {
+					this.$api.msg('请输入手机号');
+					return;
+				}
+				if (!/(^1[3|4|5|7|8|9][0-9]{9}$)/.test(this.mobile)) {
+					this.$api.msg('请输入正确的手机号码');
+					return;
+				}
 
-			// 	if (this.is_send) return;
+				if (this.is_send) return;
 
-			// 	uni.showLoading({
-			// 		title: '发送中'
-			// 	})
 
-			// 	this.code_time = 30;
-			// 	this.is_send = true;
+				this.code_time = 30;
+				
+				// console.log(this.mobile);
+				let ctcode = {
+					phone: this.mobile
+				}
+				// 发送验证码
+				sendCode(ctcode).then((res)=>{
+					if (res.code == 200) {
+						alert('验证码已发送');
+						this.is_send = true;
+					}
+				});
+				// let verifyCode = {
+				// 	phone: this.mobile,
+				// 	captcha: this.code
+				// };
+				// console.log(verifyCode)
+				// 验证验证码
+				// sendCodeVerify(data).then((res) => {
+				// 	consle.log(res)
+				// })
+				// this.$func.usemall.call('member/sendSmsCode', {
+				// 	mobile: this.mobile,
+				// 	type: 'register'
+				// }).then(res => {
+				// 	uni.hideLoading();
+				// 	if (res.code == 200) {
 
-			// 	this.$func.usemall.call('member/sendSmsCode', {
-			// 		mobile: this.mobile,
-			// 		type: 'register'
-			// 	}).then(res => {
-			// 		uni.hideLoading();
-			// 		if (res.code == 200) {
+				// 		this.$api.alert('验证码已发送', () => {
+				// 			this.timer = setInterval(() => {
+				// 				--this.code_time;
 
-			// 			this.$api.alert('验证码已发送', () => {
-			// 				this.timer = setInterval(() => {
-			// 					--this.code_time;
+				// 				if (this.code_time <= 0) {
+				// 					clearInterval(this.timer)
+				// 					this.is_send = false;
+				// 					this.code_time = 30;
+				// 					return;
+				// 				}
+				// 			}, 1000);
+				// 		});
 
-			// 					if (this.code_time <= 0) {
-			// 						clearInterval(this.timer)
-			// 						this.is_send = false;
-			// 						this.code_time = 30;
-			// 						return;
-			// 					}
-			// 				}, 1000);
-			// 			});
+				// 		return;
+				// 	}
 
-			// 			return;
-			// 		}
-
-			// 		this.is_send = false;
-			// 		this.code_time = 30;
-			// 		this.$api.msg(res.msg);
-			// 	});
-			// },
+				// 	this.is_send = false;
+				// 	this.code_time = 30;
+				// 	this.$api.msg(res.msg);
+				// });
+			},
 			tologin() {
 				// 登录页
 				uni.navigateBack({});
@@ -173,14 +199,14 @@
 					this.$api.msg('请输入密码');
 					return;
 				}
-				if (this.$api.trim(this.password).length < 4) {
-					this.$api.msg('密码长度不能小于4位');
-					return;
-				}
-				// if (!this.code) {
-				// 	this.$api.msg('请输入验证码');
+				// if (this.$api.trim(this.password).length < 4) {
+				// 	this.$api.msg('密码长度不能小于4位');
 				// 	return;
 				// }
+				if (!this.code) {
+					this.$api.msg('请输入验证码');
+					return;
+				}
 				
 				// #ifdef H5 || MP-360 || APP-PLUS
 				uni.getUserProfile = (x) => {
@@ -188,46 +214,66 @@
 						x.success({ userInfo: {} });
 					}
 				};
+				// let verifyCode = {
+				// 	phone: this.mobile,
+				// 	captcha: this.code
+				// };
+				// console.log(verifyCode);
+				let registerParams = {
+					nickname: this.nickname,
+					phone: this.mobile,
+					password: this.password,
+					captcha: this.code
+				}
+				console.log(registerParams);
+				register(registerParams).then((res) => {
+					console.log(res);
+					if(res[1].statusCode === 200){
+						console.log(res[1].data)
+						uni.navigateTo({
+							url: '/pages/login/login'
+						});
+					}
+				})
 				// #endif
 
-				uni.getUserProfile({
-					desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-					lang: 'zh_CN',
-					success: res => {
-						console.log('getUserProfile', res);
-						this.is_register = true;
-						this.$func.usemall.call('member/register', {
-							username: this.mobile,
-							password: this.password,
-							// code: this.code,
-							user: res.userInfo
-						}).then(res => {
-							this.is_register = false;
-							if (res.code == 200) {
+				// uni.getUserProfile({
+				// 	desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+				// 	lang: 'zh_CN',
+				// 	success: res => {
+				// 		console.log('getUserProfile', res);
+				// 		this.is_register = true;
+				// 		this.$func.usemall.call('member/register', {
+				// 			username: this.mobile,
+				// 			password: this.code	,
+				// 			// code: this.code,
+				// 			user: res.userInfo
+				// 		}).then(res => {
+				// 			this.is_register = false;
+				// 			if (res.code == 200) {
+				// 				this.$api.alert('注册成功', () => {
+				// 					if (this.$api.pages().length > 1) {
+				// 						uni.setStorage({
+				// 							key: '__mobile',
+				// 							data: this.mobile
+				// 						})
+				// 						// 跳转登录
+				// 						uni.navigateBack();
+				// 						return;
+				// 					}
+				// 					// 登录页
+				// 					this.$api.tologin();
+				// 					return;
+				// 				});
 						
-								this.$api.alert('注册成功', () => {
-									if (this.$api.pages().length > 1) {
-										uni.setStorage({
-											key: '__mobile',
-											data: this.mobile
-										})
-										// 跳转登录
-										uni.navigateBack();
-										return;
-									}
-									// 登录页
-									this.$api.tologin();
-									return;
-								});
+				// 				return;
+				// 			}
 						
-								return;
-							}
+				// 			this.$api.msg(res.msg);
+				// 		});
 						
-							this.$api.msg(res.msg);
-						});
-						
-					}
-				});
+				// 	}
+				// });
 			}
 
 		},

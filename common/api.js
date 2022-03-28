@@ -8,6 +8,30 @@ export function login(params){
 		data: params
 	})
 }
+// 注册接口
+export function register(params){
+	return uni.request({
+		url:`${baseUrl}/register/cellphone`,
+		method: 'POST',
+		data: params
+	})
+}
+// 发送验证码
+export function sendCode(params){
+	return uni.request({
+		url:`${baseUrl}/captcha/sent`,
+		method: 'POST',
+		data: params
+	})
+}
+// 验证验证码
+export function sendCodeVerify(params){
+	return uni.request({
+		url:`${baseUrl}/captcha/verify`,
+		method: 'POST',
+		data: params
+	})
+}
 // 请求歌单详情接口
 export function topList(){
 	// 修改前，以前的接口依赖idx 
