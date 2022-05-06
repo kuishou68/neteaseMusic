@@ -3,6 +3,7 @@
 - uni-app、vue、小程序集于一身的实战，很好的一个练手项目。包括：云音乐首页分类、音乐列表页展示、音乐详情页、音乐播放器、推荐音乐、用户留言、音乐搜索、加载骨架屏等实现。
 
 ![img](https://pic2.zhimg.com/v2-d249c81489d26cc8c2ddb44a84605445_b.jpg)
+
 (https://img-blog.csdnimg.cn/751f41d4737b47ee87f21c64729ea218.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6aKG56eANTg1OA==,size_20,color_FFFFFF,t_70,g_se,x_16)
 📣 优化内容    ①修复list.vue接口问题； ②优化detail部分样式，增加网易云logo； ③代码各个地方都有详细注释；④增加index.vue登录功能；⑤增加dateil.vue底部播放栏；⑥新增登录注册功能；
 

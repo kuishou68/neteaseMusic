@@ -5,15 +5,21 @@
 			<scroll-view scroll-y="true">
 				<!--登录-->
 				<view class="index-login">
-					<view class="index-login-left">
-						<image class="index-login-left-img" :src="userInfo.avatarUrl"></image>
+					<view class="index-left">
+						<view class="index-login-left">
+							<image class="index-login-left-img" :src="userInfo.avatarUrl"></image>
+						</view>
+						<text class="idnex-login-text">{{ userInfo.nickName ||  '未登录' }}</text>
 					</view>
-					<text class="idnex-login-text">{{ userInfo.nickName ||  '未登录' }}</text>
 					<!--#ifdef MP-WEIXIN-->	
+					<view>
 						<button type="sumbit" plain="true" size="mini" open-type="getUserInfo" @tap="login" @click="change" >{{ loginState ? '退出登录' : '立即登录' }}</button>
+					</view>
 					<!--#endif -->
 					<!--#ifdef H5-->
+					<view>
 						<button type="sumbit" plain="true" size="mini" open-type="getUserInfo" @tap="handleToLogin" @click="change" >{{ loginState ? '退出登录' : '立即登录'}}</button>
+					</view>
 					<!--#endif -->
 				</view>
 				<!--搜索栏-->
@@ -165,14 +171,14 @@
 
 <style>
 	/*登录*/
-	.index-login{ margin: auto; width:379px; }
+	.index-login{ margin:0 30rpx;display: flex; justify-content: space-between; }
 	.index-login-left{ width:35px; height:35px;  position: absolute; overflow: hidden; background: url(../../static/user.png); }
 	.index-login-left-img{ width:35px; height:35px;  border-radius: 50%; }
 	.index-login-img-text{ font-size:34px; color:#dddddd; }
 	.idnex-login-text{ font-size:14px; vertical-align: sub; margin-left: 45px; color:#888; }
-	.index-login button{ float:right; border:1px #dddddd solid; border-radius: 30px; }
+	.index-login button{ border:1px #dddddd solid; border-radius: 30px; }
 	/*搜索栏*/
-	.index-search{ display: flex; background:#f7f7f7; height:73rpx; margin:30rpx; border-radius: 50rpx; align-items: center;}
+	.index-search{ margin: 30rpx; display: flex; background:#f7f7f7; height:73rpx; border-radius: 50rpx; align-items: center;}
 	.index-search text{ margin:0 27rpx;} 
 	.index-search input{ font-size:26rpx; flex:1;}
 	/*歌曲分类*/
