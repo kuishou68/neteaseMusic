@@ -127,14 +127,9 @@
   height: 98rpx;
   background: #FFFFFF;
   box-shadow: 0 2rpx 40rpx 0 rgba(0, 0, 0, 0.18);
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  justify-content: space-around;
+  align-items: center;
   z-index: 9999;
   /*旋转图片*/
   /*歌曲信息*/
@@ -181,9 +176,7 @@ to {
 }
 }
 .container .player-info.data-v-3ed8ddac {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
+  flex: 1;
   font-size: 10pt;
   line-height: 38rpx;
   margin-left: 127rpx;
@@ -362,8 +355,36 @@ to {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*登录*/
-.index-login{ margin: auto; width:379px;
+.index-login{ margin:0 30rpx;display: flex; justify-content: space-between;
 }
 .index-login-left{ width:35px; height:35px;  position: absolute; overflow: hidden; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAOESURBVFhHtZh5TzIxEMa764UiQRGVgDH4B9//Axm5FBPjfXAIKvIbO7y47HbLKzxJ49J2Zp6ZTqetwXgCswA+Pj7M29ubeX9/l/b19SUtDENpW1tb0nZ3d836+rqV8oM3mcfHR2mQCYJg2qJAnTbI7O/vS/NBKpnn52dzc3MjhvEcxJGIQtUSNb6Pj49NPp+XviQ4ybTbbTMYDMza2poXgSRg4vPz02QyGXN6emp75xFLhqWo1+vTPFgWNL/Ozs7MxsaG7f2HOTKj0cg0Go3UaCBGQ7kC4sikyRGlOEJzZM7Pz6dKk6B5cHBwYHZ2diRRiWav1zP39/ci64qoOlGr1WzPD36RaTabotSlCK+y2awpl8u2Zx6dTkeIEd0kQAYnqtWq7ZlE1v41T09PZjgcOomgYHt720kEVCoVidjsEkaBHexhVzG1fHt76/SEANJOTk5sjxsQUpkkYA+7CiHDOoO0xMvlcvaXH5jvIqP21L6QobK6lgeglFxZBCyViwzALvblm3VjbV1RUaQRjsK17ArsYl/ylaz3IQLYaYuAmuUD7MMjpNz7kGHOy8uL/eWH19dXb93wCPUUTgNz+v2+t7fMY76vbqlvvqFHgBzg8PTB5eWlzPchA4SM/fYCitkdFxcXcrGKA/2M+26KWQSTQ3FMiV9EEELIcKNjuxMBfne7XSGzSEQA+kSm1WqNWd80YQSiNSPah46onri+KNCxublpguvr6zEeJdUQJuI14xQxX69Vji3LkrnkGCfCwaT6jZPOJZRxspZKJTkg/xcQ4upKksbZgQzXkTCpZCO4t7cnl6C/EAHYQA934LjdCxnmhKwVbGcJERGIHB4e2p7l4OjoSF4K6FdgF/tsBkkUJsBOB1kaBFcBHES/Oo9dHAdCplAoyCCNQXJklUA/dpQQ+QKmWwjGGr6/5kgaVD/2isWifIMpGZZKb+uU8lVCjxTszb42fxUXMp7QccBN6o/tXS6urq6kSmMHe7P4RQboBB73y44QEcFR8mX2VaCIfVHqQ46KSeXlNfCXPNJIa9LisNeLUkE37yiI8U1RIsl5L/uCCxPVXW+TECAiScdCIhnFw8ODubu7s79+7rXc+iFHoaJmoBw1VFfyAePc8nR3Ms6uSfvXSCoZBc8JbvGE2geoJRIUNOqYD7zJKLjFc8qzBCwh3kMQ74kaxwv5xSkclxfJMOYbnKBso2A1p/wAAAAASUVORK5CYII=);
 }
@@ -373,19 +394,19 @@ to {
 }
 .idnex-login-text{ font-size:14px; vertical-align: sub; margin-left: 45px; color:#888;
 }
-.index-login button{ float:right; border:1px #dddddd solid; border-radius: 30px;
+.index-login button{ border:1px #dddddd solid; border-radius: 30px;
 }
 /*搜索栏*/
-.index-search{ display: -webkit-box; display: -webkit-flex; display: flex; background:#f7f7f7; height:73rpx; margin:30rpx; border-radius: 50rpx; -webkit-box-align: center; -webkit-align-items: center; align-items: center;}
+.index-search{ margin: 30rpx; display: flex; background:#f7f7f7; height:73rpx; border-radius: 50rpx; align-items: center;}
 .index-search text{ margin:0 27rpx;}
-.index-search input{ font-size:26rpx; -webkit-box-flex:1; -webkit-flex:1; flex:1;}
+.index-search input{ font-size:26rpx; flex:1;}
 /*歌曲分类*/
 .index-list{ margin:0 30rpx;}
-.index-list-item{ display: -webkit-box; display: -webkit-flex; display: flex; margin-bottom: 35rpx;}
+.index-list-item{ display: flex; margin-bottom: 35rpx;}
 .index-list-img{ width:212rpx; height:212rpx; margin-right:20rpx; border-radius: 15rpx; overflow: hidden; position: relative;}
 .index-list-img image{ width:100%; height:100%;}
 .index-list-img text{ position: absolute; font-size:22rpx; color:white; bottom: 15rpx; left:15rpx;}
-.index-list-text{ -webkit-box-flex:1; -webkit-flex:1; flex:1; font-size:24rpx; line-height: 68rpx;
+.index-list-text{ flex:1; font-size:24rpx; line-height: 68rpx;
 }
 .index-list-text view{ width:60vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }

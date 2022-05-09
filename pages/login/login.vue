@@ -226,31 +226,6 @@
 			}
 			// #endif
 		},
-		onLoad() {
-			let _this = this;
-
-			// this.$api.get_env(res => {
-			// 	this.env = res;
-			// 	console.log('this.env', this.env);
-			// 	this.ismp = this.env.is_mp;
-			// 	this.platform = this.env.platform;
-			// 	this.platform_icon = this.env.platform_icon;
-			// 	this.platform_name = this.env.platform_name;
-			// 	// #ifdef APP
-			// 	this.hasApple = this.env.os.name == 'ios';
-			// 	// #endif
-			// });
-
-			// this.$db['usemall-sys-agreement'].where({
-			// 	type: '登录'
-			// }).tolist().then(res => {
-			// 	if (res.code == 200) {
-			// 		this.agreementDatas = res.datas;
-
-			// 		this.agreementContent += this.agreementDatas.map(x => x.name).join('、');
-			// 	}
-			// })
-		},
 		methods: {
 			...mapMutations(['login', 'logout', 'token']),
 			openAuthSetting() {
@@ -366,19 +341,14 @@
 					data.phone = this.mobile;
 					data.password = this.password;
 					console.log(data)
-					// uni.showLoading({
-					// 	title: '登录中'
-					// })
 					// 登录请求
 					login(data).then((res)=>{
 						if (res[1].statusCode == 200) {
 							// console.log(res[1].data);	
 							let data = res[1].data;
 							console.log(data);
-							this.$store.commit('login',data);
-							// 登录成功
-							// this.$refs.popup.open('center')
-							// 跳转至首页
+							this.$store.commit('login', data);
+							// 登录成功 跳转至首页
 							uni.navigateTo({
 								url: '/pages/index/index',
 							});
@@ -420,82 +390,7 @@
 					this.$api.msg(this.agreementContent);
 					return;
 				}
-
-				
-
-			// 	this.$func.usemall
-			// 		.call(url, data)
-			// 		.then(res => {
-			// 			uni.hideLoading();
-
-			// 			if (res.code == 100) {
-			// 				// 当前手机号已绑定其他微信号，弹窗询问是否解绑
-			// 				uni.showModal({
-			// 					content: '已绑定其他微信号，是否解绑并绑定当前微信号',
-			// 					cancelText: '取消',
-			// 					confirmText: '解绑并绑定',
-			// 					success: (res) => {
-			// 						if (res.confirm) {
-			// 							// 登录类型解绑并绑定
-			// 							this.tologin('unbind-bind');
-			// 						}
-			// 					}
-			// 				})
-			// 				return;
-			// 			}
-
-			// 			if (res.code == 200) {
-			// 				// 调用 store login
-			// 				if (res.datas.member && res.datas.member.is_plus === '付费会员' && res.datas.member
-			// 					.plus_time >= new Date().getTime()) {
-			// 					res.datas.member.vip = true;
-			// 				}
-			// 				uni.setStorage({
-			// 					key: '__mobile',
-			// 					data: _this.mobile
-			// 				})
-			// 				uni.setStorage({
-			// 					key: '__loginWay',
-			// 					data: _this.loginWay
-			// 				})
-			// 				_this.login(res.datas);
-
-			// 				this.$api.msg('登录成功');
-			// 				if (_this.$api.pages().length > 1) {
-			// 					// 返回上一页
-			// 					uni.navigateBack({});
-			// 					return;
-			// 				}
-			// 				// 首页
-			// 				_this.$api.tohome();
-			// 				return;
-			// 			}
-
-			// 			this.$api.msg(res.msg);
-			// 		});
-			// },
-			
-			// close() {
-			// 	this.$refs.popup.close()
-			// }
-
-			// 微信授权登录，获取用户信息
-			// mpGetUserInfo(userinfo) {
-			// 	if (!this.agreement) {
-			// 		this.$api.msg(this.agreementContent);
-			// 		return;
-			// 	}
-			// 	this.$api.msg('处理中');
-			// 	this.logout();
-
-			// 	this.$api.msg('请使用手机号+密码的方式登录');
-			// 	if (this.platform !== 'weixin' && this.platform !== 'baidu' && this.platform !== 'qq' && this.platform !==
-			// 		'toutiao') {
-			// 		this.$api.msg('请使用手机号+密码的方式登录');
-			// 		return;
-			// 	}
-			// },
-			// #ifdef MP-ALIPAY
+			},
 			onGetAuthorize() {
 				if (!this.agreement) {
 					this.$api.msg(this.agreementContent);
@@ -540,203 +435,10 @@
 						console.log('uni.login', err);
 					}
 				});
-
-				// 调用 store mp_login
-				// _this.mp_login({
-				// 	logintype: 'relogin',
-				// 	type: _this.platform + '-mini',
-				// 	callback: (loginres) => {
-				// 		console.log('mp_login callback', loginres);
-				// 		if (loginres.code !== 200) {
-				// 			_this.$api.msg(loginres.msg, 5000);
-				// 			return;
-				// 		}
-
-				// 		// 调用 store login
-				// 		_this.login(loginres.datas);
-
-				// 		_this.$api.alert('登录成功', () => {
-				// 			uni.navigateBack();
-				// 		});
-				// 	}
-				// });
 			},
 			onAuthError(res) {
 				console.log('onAuthError', arguments);
 				this.$api.msg(res.detail.errorMessage)
-			},
-			// #endif
-			// getUserInfo() {
-			// 	let _this = this;
-			// 	this.$api.msg('处理中');
-			// 	console.log('------- getUserInfo 用户授权，并获取用户基本信息和加密数据------');
-			// },
-			// getUserProfile() {
-			// 	uni.getUserProfile();
-			// },
-			// #ifdef MP-WEIXIN || APP
-			mpWeixinTologin() {
-				if (!this.agreement) {
-					this.$api.msg(this.agreementContent);
-					return;
-				}
-				uni.showLoading({
-					title: '处理中'
-				});
-				let _this = this;
-
-				// 获取用户数据
-				_this.mpWeixinGetUserProfile((success, userRes) => {
-					if (!success) {
-						uni.hideLoading();
-						return;
-					}
-
-					uni.login({
-						provider: 'weixin',
-						onlyAuthorize: true,
-						success(mpres) {
-							console.log('uni.login', mpres);
-							if (mpres.errMsg == 'login:ok') {
-								_this.$func.usemall
-									.call('member/loginByWeixin', {
-										sharemid: uni.getStorageSync('__use_share_mid') || '',
-										code: mpres.code,
-										user: userRes
-									})
-									.then(res => {
-										uni.hideLoading();
-
-										if (res.code == 100) {
-											uni.setStorage({
-												key: '__wxuser',
-												data: userRes
-											})
-											// 未绑定手机号
-											_this.bindMobileShow = true;
-											_this.$api.msg(res.msg);
-											return;
-										}
-
-										if (res.code == 200) {
-											console.log('member/loginByWeixin', res);
-											// 调用 store login
-											_this.login(res.datas);
-
-											// 存储已授权登录
-											uni.setStorageSync('__usemall_login', _this.$api.format(
-												new Date(), 'yyyyqq'));
-
-											_this.$api.msg('登录成功');
-											if (_this.$api.pages().length > 1) {
-												// 返回上一页
-												uni.navigateBack({});
-												return;
-											}
-											// 首页
-											_this.$api.tohome();
-											return;
-										}
-
-										_this.$api.msg(res.msg);
-									});
-							}
-						},
-						fail(err) {
-							console.log('uni.login', err);
-							uni.hideLoading();
-						}
-					});
-				});
-
-			},
-			mpWeixinGetUserProfile(callback) {
-				// #ifdef APP
-				callback(true, null);
-				return;
-				// #endif
-
-				// 判断是否为首次登录
-				if (uni.getStorageSync('__usemall_login') === this.$api.format(new Date(), 'yyyyqq')) {
-					// 已登录
-					callback(true, null);
-					return;
-				}
-
-				uni.getUserProfile({
-					desc: '更新会员信息',
-					lang: 'zh_CN',
-					success(res) {
-						if (typeof callback === 'function') {
-							callback(true, {
-								nickname: res.userInfo.nickName,
-								gender: res.userInfo.gender,
-								avatar: res.userInfo.avatarUrl,
-								comment: [res.userInfo.country, res.userInfo.province, res.userInfo.city]
-									.filter(x => x).join('-')
-							});
-						}
-					},
-					fail(err) {
-						console.log(err);
-						callback(false, null);
-					}
-				});
-			},
-			async getWeixinCode() {
-				return new Promise((resolve, reject) => {
-					// #ifdef MP-WEIXIN
-					uni.login({
-						success: (res) => {
-							resolve(res.code);
-						},
-						fail: (err) => {
-							reject(err)
-						}
-					});
-					// #endif
-					// #ifdef APP-PLUS
-					weixinAuthService.authorize((res) => {
-						resolve(res.code)
-					}, (err) => {
-						console.log(err)
-						reject(new Error('微信登录失败'))
-					});
-					// #endif
-				})
-			},
-			// #endif
-			// codeChange(code) {
-			// 	this.code = code;
-			// },
-			// codeSent(res) {
-			// 	if (!res.bound) {
-			// 		// #ifdef MP-WEIXIN
-			// 		const ltype = '__usemall_login_sms_' + this.mobile;
-			// 		uni.removeStorage({
-			// 			key: ltype
-			// 		});
-			// 		// #endif
-			// 	}
-			// },
-
-			// inputChange(e) {
-			// 	const key = e.currentTarget.dataset.key;
-			// 	this[key] = e.detail.value;
-			// },
-			// verify() {
-			// 	this.codeValid = false;
-			// 	if (!this.mobile) {
-			// 		this.$api.msg('请输入手机号');
-			// 		return false;
-			// 	}
-			// 	if (!/(^1[0-9][0-9]{9}$)/.test(this.mobile)) {
-			// 		this.$api.msg('请输入正确的手机号码');
-			// 		return false;
-			// 	}
-
-			// 	this.codeValid = true;
-			// 	return true;
 			}
 		}
 	};

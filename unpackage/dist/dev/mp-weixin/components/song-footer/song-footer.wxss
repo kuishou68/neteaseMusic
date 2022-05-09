@@ -127,14 +127,9 @@
   height: 98rpx;
   background: #FFFFFF;
   box-shadow: 0 2rpx 40rpx 0 rgba(0, 0, 0, 0.18);
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  justify-content: space-around;
+  align-items: center;
   z-index: 9999;
   /*旋转图片*/
   /*歌曲信息*/
@@ -181,9 +176,7 @@ to {
 }
 }
 .container .player-info.data-v-3ed8ddac {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
+  flex: 1;
   font-size: 10pt;
   line-height: 38rpx;
   margin-left: 127rpx;

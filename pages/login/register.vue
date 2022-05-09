@@ -140,42 +140,6 @@
 						this.is_send = true;
 					}
 				});
-				// let verifyCode = {
-				// 	phone: this.mobile,
-				// 	captcha: this.code
-				// };
-				// console.log(verifyCode)
-				// 验证验证码
-				// sendCodeVerify(data).then((res) => {
-				// 	consle.log(res)
-				// })
-				// this.$func.usemall.call('member/sendSmsCode', {
-				// 	mobile: this.mobile,
-				// 	type: 'register'
-				// }).then(res => {
-				// 	uni.hideLoading();
-				// 	if (res.code == 200) {
-
-				// 		this.$api.alert('验证码已发送', () => {
-				// 			this.timer = setInterval(() => {
-				// 				--this.code_time;
-
-				// 				if (this.code_time <= 0) {
-				// 					clearInterval(this.timer)
-				// 					this.is_send = false;
-				// 					this.code_time = 30;
-				// 					return;
-				// 				}
-				// 			}, 1000);
-				// 		});
-
-				// 		return;
-				// 	}
-
-				// 	this.is_send = false;
-				// 	this.code_time = 30;
-				// 	this.$api.msg(res.msg);
-				// });
 			},
 			tologin() {
 				// 登录页
@@ -236,44 +200,6 @@
 					}
 				})
 				// #endif
-
-				// uni.getUserProfile({
-				// 	desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-				// 	lang: 'zh_CN',
-				// 	success: res => {
-				// 		console.log('getUserProfile', res);
-				// 		this.is_register = true;
-				// 		this.$func.usemall.call('member/register', {
-				// 			username: this.mobile,
-				// 			password: this.code	,
-				// 			// code: this.code,
-				// 			user: res.userInfo
-				// 		}).then(res => {
-				// 			this.is_register = false;
-				// 			if (res.code == 200) {
-				// 				this.$api.alert('注册成功', () => {
-				// 					if (this.$api.pages().length > 1) {
-				// 						uni.setStorage({
-				// 							key: '__mobile',
-				// 							data: this.mobile
-				// 						})
-				// 						// 跳转登录
-				// 						uni.navigateBack();
-				// 						return;
-				// 					}
-				// 					// 登录页
-				// 					this.$api.tologin();
-				// 					return;
-				// 				});
-						
-				// 				return;
-				// 			}
-						
-				// 			this.$api.msg(res.msg);
-				// 		});
-						
-				// 	}
-				// });
 			}
 
 		},

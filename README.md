@@ -4,7 +4,7 @@
 
 ![img](https://pic2.zhimg.com/v2-d249c81489d26cc8c2ddb44a84605445_b.jpg)
 
-(https://img-blog.csdnimg.cn/751f41d4737b47ee87f21c64729ea218.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6aKG56eANTg1OA==,size_20,color_FFFFFF,t_70,g_se,x_16)
+![img](https://img-blog.csdnimg.cn/751f41d4737b47ee87f21c64729ea218.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6aKG56eANTg1OA==,size_20,color_FFFFFF,t_70,g_se,x_16)
 📣 优化内容    ①修复list.vue接口问题； ②优化detail部分样式，增加网易云logo； ③代码各个地方都有详细注释；④增加index.vue登录功能；⑤增加dateil.vue底部播放栏；⑥新增登录注册功能；
 
 🎉下载地址  [ https://blog.csdn.net/weixin_44019370/article/details/118109692](https://link.juejin.cn/?target=https%3A%2F%2Fblog.csdn.net%2Fweixin_44019370%2Farticle%2Fdetails%2F118109692)    拿走不谢；

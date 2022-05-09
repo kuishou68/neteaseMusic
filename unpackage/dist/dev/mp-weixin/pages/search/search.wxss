@@ -267,28 +267,28 @@
 
 
 /*搜索栏*/
-.search-search.data-v-4cedc0c6{ display: -webkit-box; display: -webkit-flex; display: flex; background:#f7f7f7; height:73rpx; margin:28rpx 30rpx 30rpx 30rpx; border-radius: 50rpx; -webkit-box-align: center; -webkit-align-items: center; align-items: center;}
+.search-search.data-v-4cedc0c6{ display: flex; background:#f7f7f7; height:73rpx; margin:28rpx 30rpx 30rpx 30rpx; border-radius: 50rpx; align-items: center;}
 .search-search text.data-v-4cedc0c6{ margin:0 27rpx;}
-.search-search input.data-v-4cedc0c6{ font-size:26rpx; -webkit-box-flex:1; -webkit-flex:1; flex:1;}
+.search-search input.data-v-4cedc0c6{ font-size:26rpx; flex:1;}
 /*搜索历史*/
 .search-history.data-v-4cedc0c6{ margin:0 30rpx; font-size:26rpx;}
-.search-history-head.data-v-4cedc0c6{ display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-pack: justify; -webkit-justify-content: space-between; justify-content: space-between;}
-.search-history-list.data-v-4cedc0c6{ display: -webkit-box; display: -webkit-flex; display: flex; margin-top:36rpx; -webkit-flex-wrap: wrap; flex-wrap: wrap;}
+.search-history-head.data-v-4cedc0c6{ display: flex; justify-content: space-between;}
+.search-history-list.data-v-4cedc0c6{ display: flex; margin-top:36rpx; flex-wrap: wrap;}
 .search-history-list view.data-v-4cedc0c6{ padding:20rpx 40rpx; background:#f7f7f7; border-radius: 50rpx; margin-right:30rpx; margin-bottom: 20rpx;}
 /*热搜榜*/
 .search-hot.data-v-4cedc0c6{ margin:30rpx 30rpx; font-size:26rpx; color:#bebebe;}
 .search-hot-title.data-v-4cedc0c6{}
-.search-hot-item.data-v-4cedc0c6{ display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; margin-top: 40rpx;}
+.search-hot-item.data-v-4cedc0c6{ display: flex; align-items: center; margin-top: 40rpx;}
 .search-hot-top.data-v-4cedc0c6{ width:60rpx; color:#fb2221; font-size:34rpx;}
-.search-hot-word.data-v-4cedc0c6{ -webkit-box-flex:1; -webkit-flex:1; flex:1;}
+.search-hot-word.data-v-4cedc0c6{ flex:1;}
 .search-hot-word view.data-v-4cedc0c6:nth-child(1){ font-size:36rpx; color:black;}
 .search-hot-word image.data-v-4cedc0c6{ width:48rpx; height:22rpx;}
 .search-hot-count.data-v-4cedc0c6{}
 /*搜索内容*/
 .search-result.data-v-4cedc0c6{ border-top: 2rpx #e5e5e5 solid; padding:30rpx;}
-.search-result-item.data-v-4cedc0c6{ display: -webkit-box; display: -webkit-flex; display: flex; -webkit-box-align: center; -webkit-align-items: center; align-items: center; border-bottom: 2rpx #e5e5e5 solid; padding-bottom:30rpx; margin-bottom: 30rpx;}
+.search-result-item.data-v-4cedc0c6{ display: flex; align-items: center; border-bottom: 2rpx #e5e5e5 solid; padding-bottom:30rpx; margin-bottom: 30rpx;}
 .search-result-item text.data-v-4cedc0c6{ font-size:50rpx;}
-.search-result-word.data-v-4cedc0c6{ -webkit-box-flex:1; -webkit-flex:1; flex:1;}
+.search-result-word.data-v-4cedc0c6{ flex:1;}
 .search-result-word view.data-v-4cedc0c6:nth-child(1){ font-size:28rpx; color:#3e6694;}
 .search-result-word view.data-v-4cedc0c6:nth-child(2){ font-size:26rpx;}
 /*搜索提示*/

@@ -25,20 +25,13 @@
 /* 透明度 */
 /* 文章场景相关 */
 .skeleton.data-v-292d9f24 {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   padding: 20rpx;
   box-sizing: border-box;
 }
 .skeleton.vertical.data-v-292d9f24 {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
 .skeleton.vertical .skeleton-content.data-v-292d9f24 {
   width: 100%;
@@ -47,20 +40,12 @@
 }
 .skeleton-avatar.data-v-292d9f24 {
   background: #dddddd;
-  -webkit-flex-shrink: 0;
-          flex-shrink: 0;
+  flex-shrink: 0;
 }
 .skeleton-content.data-v-292d9f24 {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
-  display: -webkit-box;
-  display: -webkit-flex;
+  flex: 1;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   margin-left: 20rpx;
   overflow: hidden;
 }
