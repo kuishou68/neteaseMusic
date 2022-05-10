@@ -15,6 +15,8 @@
 
 ![img](https://pic2.zhimg.com/v2-0b29ef853fb99ef9f001e017ed686811_b.png)
 
+👀预览地址：[http://lijianlin.com.cn/#/](http://lijianlin.com.cn/#/)
+
 ⚡后端接口地址  [github.com/Binaryify/N…](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2FBinaryify%2FNeteaseCloudMusicApi)
 
 🎉项目下载地址 [ https://github.com/kuishou68/neteaseMusic](https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2Fkuishou68%2FneteaseMusic)

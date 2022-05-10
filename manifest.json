@@ -129,5 +129,21 @@
     },
     "mp-toutiao" : {
         "usingComponents" : true
+    },
+    "h5" : {
+        "domain" : "119.3.81.126",
+        "devServer" : {
+            "https" : false,
+            "port" : ""
+        },
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : true
+            }
+        },
+        "title" : "音乐移动端",
+        "router" : {
+            "mode" : "hash"
+        }
     }
 }
